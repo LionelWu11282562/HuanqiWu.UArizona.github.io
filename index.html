@@ -1,86 +1,2591 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Huanqi Wu</title>
-    <style>
-        body {
-            font-family: Georgia, serif;
-            max-width: 800px;
-            margin: 50px auto;
-            line-height: 1.6;
-            color: #222;
-        }
-        h1 {
-            border-bottom: 2px solid #444;
-        }
-        a {
-            color: #003366;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .section {
-            margin-top: 40px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Huanqi Wu | Data Science & Research</title>
+
+  <meta
+    name="description"
+    content="Huanqi Wu — Data Science, Statistics, Machine Learning and Computational Research."
+  >
+
+  <style>
+
+    /* =========================================================
+       01. GLOBAL
+       ========================================================= */
+
+    :root {
+      --bg: #f2f1ec;
+      --bg-dark: #111111;
+      --text: #111111;
+      --text-light: #f5f4ef;
+      --muted: #77756f;
+      --line: #cbc9c1;
+
+      /* UA-inspired accent */
+      --accent: #ab0520;
+
+      --pad-x: 5vw;
+      --pad-y: 38px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        Helvetica Neue,
+        Helvetica,
+        Arial,
+        sans-serif;
+    }
+
+    body {
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+
+    /* =========================================================
+       02. FIXED NAVIGATION
+       ========================================================= */
+
+    .topbar {
+      position: fixed;
+      z-index: 1000;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      padding:
+        26px
+        var(--pad-x);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      mix-blend-mode: difference;
+      color: white;
+
+      pointer-events: none;
+    }
+
+    .brand {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+
+      pointer-events: auto;
+    }
+
+    .nav-links button {
+      border: 0;
+      padding: 0;
+
+      color: inherit;
+      background: transparent;
+
+      cursor: pointer;
+      opacity: .7;
+
+      transition:
+        opacity .25s ease,
+        transform .25s ease;
+    }
+
+    .nav-links button:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================================================
+       03. PROGRESS
+       ========================================================= */
+
+    .progress-track {
+      position: fixed;
+      z-index: 1001;
+
+      left: 0;
+      bottom: 0;
+
+      height: 3px;
+      width: 100%;
+
+      background: rgba(120,120,120,.15);
+    }
+
+    .progress-bar {
+      width: 14.2857%;
+      height: 100%;
+
+      background: var(--accent);
+
+      transition:
+        width .8s cubic-bezier(.76,0,.24,1);
+    }
+
+
+    /* =========================================================
+       04. SIDE COUNTER
+       ========================================================= */
+
+    .page-counter {
+      position: fixed;
+      z-index: 500;
+
+      right: 28px;
+      top: 50%;
+
+      transform:
+        translateY(-50%)
+        rotate(90deg);
+
+      transform-origin: center;
+
+      font-size: 10px;
+      letter-spacing: .18em;
+
+      color: #777;
+
+      mix-blend-mode: difference;
+    }
+
+
+    /* =========================================================
+       05. SLIDE SYSTEM
+       ========================================================= */
+
+    #deck {
+      width: 100%;
+      height: 100%;
+
+      transition:
+        transform .95s
+        cubic-bezier(.76,0,.24,1);
+
+      will-change: transform;
+    }
+
+    .slide {
+      position: relative;
+
+      width: 100vw;
+      height: 100vh;
+
+      min-height: 650px;
+
+      padding:
+        105px
+        var(--pad-x)
+        55px;
+
+      overflow: hidden;
+    }
+
+    .slide-inner {
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+
+      letter-spacing: .16em;
+      text-transform: uppercase;
+
+      color: var(--muted);
+    }
+
+    .slide-index {
+      font-size: 11px;
+      letter-spacing: .14em;
+      color: var(--muted);
+    }
+
+
+    /* =========================================================
+       06. ANIMATION
+       ========================================================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+
+      transition:
+        opacity .8s ease,
+        transform .9s cubic-bezier(.16,1,.3,1);
+    }
+
+    .slide.active .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 {
+      transition-delay: .08s;
+    }
+
+    .delay-2 {
+      transition-delay: .16s;
+    }
+
+    .delay-3 {
+      transition-delay: .24s;
+    }
+
+    .delay-4 {
+      transition-delay: .32s;
+    }
+
+
+    /* =========================================================
+       07. HERO
+       ========================================================= */
+
+    .hero {
+      background: var(--bg);
+    }
+
+    .hero-grid {
+      flex: 1;
+
+      display: grid;
+      grid-template-columns:
+        minmax(0, 1.45fr)
+        minmax(320px, .55fr);
+
+      align-items: center;
+      gap: 7vw;
+    }
+
+    .hero-title {
+      max-width: 1000px;
+
+      font-size:
+        clamp(66px, 9.7vw, 165px);
+
+      font-weight: 700;
+
+      line-height: .79;
+      letter-spacing: -.075em;
+
+      text-transform: uppercase;
+    }
+
+    .hero-title .accent-word {
+      color: var(--accent);
+    }
+
+    .hero-description {
+      max-width: 470px;
+
+      margin-top: 36px;
+
+      font-size:
+        clamp(16px, 1.35vw, 21px);
+
+      line-height: 1.55;
+
+      color: #45443f;
+    }
+
+    .hero-panel {
+      align-self: stretch;
+
+      display: flex;
+      flex-direction: column;
+
+      justify-content: center;
+
+      border-left: 1px solid var(--line);
+
+      padding-left: 3.5vw;
+    }
+
+    .identity-mark {
+      font-size:
+        clamp(75px, 9vw, 150px);
+
+      font-weight: 700;
+
+      letter-spacing: -.09em;
+      line-height: .8;
+    }
+
+    .hero-meta {
+      margin-top: 42px;
+
+      display: grid;
+      gap: 11px;
+
+      font-size: 12px;
+      line-height: 1.45;
+
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    .hero-bottom {
+      padding-top: 20px;
+
+      border-top: 1px solid var(--line);
+
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .scroll-arrow {
+      display: inline-block;
+      animation: bounce 1.6s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(7px);
+      }
+    }
+
+
+    /* =========================================================
+       08. WORK OVERVIEW
+       ========================================================= */
+
+    .overview {
+      background: #151515;
+      color: var(--text-light);
+    }
+
+    .overview .eyebrow,
+    .overview .slide-index {
+      color: #979797;
+    }
+
+    .overview-heading {
+      margin-top: 8vh;
+
+      max-width: 900px;
+
+      font-size:
+        clamp(44px, 6.7vw, 105px);
+
+      line-height: .95;
+      letter-spacing: -.06em;
+
+      font-weight: 600;
+    }
+
+    .overview-heading span {
+      color: #6f6f6f;
+    }
+
+    .projects-menu {
+      margin-top: auto;
+
+      border-top:
+        1px solid #393939;
+    }
+
+    .project-menu-item {
+      width: 100%;
+
+      display: grid;
+      grid-template-columns:
+        75px
+        minmax(230px, 1fr)
+        1fr
+        auto;
+
+      align-items: center;
+      gap: 30px;
+
+      padding: 21px 0;
+
+      border-bottom:
+        1px solid #393939;
+
+      background: transparent;
+      color: inherit;
+
+      text-align: left;
+
+      cursor: pointer;
+
+      transition:
+        padding-left .3s ease,
+        color .3s ease;
+    }
+
+    .project-menu-item:hover {
+      padding-left: 13px;
+      color: #ffffff;
+    }
+
+    .menu-number {
+      font-size: 11px;
+      color: #777;
+    }
+
+    .menu-title {
+      font-size:
+        clamp(22px, 2.4vw, 38px);
+
+      font-weight: 500;
+      letter-spacing: -.035em;
+    }
+
+    .menu-description {
+      font-size: 12px;
+      line-height: 1.45;
+      color: #909090;
+
+      max-width: 480px;
+    }
+
+    .menu-arrow {
+      font-size: 20px;
+    }
+
+
+    /* =========================================================
+       09. PROJECT COMMON
+       ========================================================= */
+
+    .project-slide {
+      background: var(--bg);
+    }
+
+    .project-layout {
+      flex: 1;
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(420px, .95fr);
+
+      gap: 7vw;
+
+      align-items: center;
+    }
+
+    .project-kicker {
+      display: flex;
+      gap: 18px;
+
+      margin-bottom: 23px;
+
+      font-size: 10px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+
+      color: var(--muted);
+    }
+
+    .project-title {
+      font-size:
+        clamp(58px, 8vw, 132px);
+
+      line-height: .82;
+
+      letter-spacing: -.075em;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+    }
+
+    .project-summary {
+      max-width: 630px;
+
+      margin-top: 33px;
+
+      font-size:
+        clamp(16px, 1.4vw, 21px);
+
+      line-height: 1.55;
+
+      color: #464540;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-top: 28px;
+    }
+
+    .tag {
+      padding: 8px 13px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 999px;
+
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .project-links {
+      margin-top: 34px;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 26px;
+    }
+
+    .text-link {
+      position: relative;
+
+      padding-bottom: 5px;
+
+      font-size: 11px;
+      font-weight: 600;
+
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .text-link::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: 0;
+
+      width: 100%;
+      height: 1px;
+
+      background: currentColor;
+
+      transform-origin: right;
+      transform: scaleX(0);
+
+      transition:
+        transform .3s ease;
+    }
+
+    .text-link:hover::after {
+      transform-origin: left;
+      transform: scaleX(1);
+    }
+
+
+    /* =========================================================
+       10. VISUAL PANEL
+       ========================================================= */
+
+    .visual-panel {
+      position: relative;
+
+      min-height: 57vh;
+
+      border:
+        1px solid var(--line);
+
+      padding: 30px;
+
+      display: flex;
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      overflow: hidden;
+    }
+
+    .visual-panel::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background-image:
+        linear-gradient(
+          rgba(0,0,0,.045) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,.045) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        34px 34px;
+
+      pointer-events: none;
+    }
+
+    .visual-label {
+      position: relative;
+
+      display: flex;
+      justify-content: space-between;
+
+      font-size: 9px;
+
+      letter-spacing: .12em;
+      text-transform: uppercase;
+
+      color: var(--muted);
+    }
+
+
+    /* =========================================================
+       11. PROJECT 01 VISUAL
+       ========================================================= */
+
+    .metrics {
+      position: relative;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 1px;
+
+      background: var(--line);
+    }
+
+    .metric {
+      background: var(--bg);
+
+      padding: 25px 22px;
+    }
+
+    .metric-value {
+      font-size:
+        clamp(40px, 4vw, 70px);
+
+      letter-spacing: -.06em;
+      font-weight: 600;
+    }
+
+    .metric-label {
+      margin-top: 10px;
+
+      font-size: 9px;
+
+      letter-spacing: .12em;
+      text-transform: uppercase;
+
+      color: var(--muted);
+    }
+
+    .pu-flow {
+      position: relative;
+
+      margin-top: 25px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .node {
+      width: 68px;
+      height: 68px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid #111;
+
+      display: grid;
+      place-items: center;
+
+      font-size: 9px;
+      letter-spacing: .1em;
+    }
+
+    .node.highlight {
+      background: var(--accent);
+      border-color: var(--accent);
+
+      color: white;
+    }
+
+    .flow-line {
+      height: 1px;
+      flex: 1;
+
+      margin: 0 12px;
+
+      background: #999;
+    }
+
+
+    /* =========================================================
+       12. PROJECT 02 VISUAL
+       ========================================================= */
+
+    .pipeline {
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 0;
+    }
+
+    .pipeline-row {
+      padding:
+        14px
+        4px;
+
+      border-bottom:
+        1px solid var(--line);
+
+      display: grid;
+
+      grid-template-columns:
+        70px 1fr auto;
+
+      align-items: center;
+
+      font-size: 11px;
+    }
+
+    .pipeline-row strong {
+      font-size: 28px;
+
+      letter-spacing: -.04em;
+    }
+
+    .pipeline-index {
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+    .pipeline-result {
+      font-size: 10px;
+
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    .pipeline-row.final strong {
+      color: var(--accent);
+    }
+
+
+    /* =========================================================
+       13. PROJECT 03 VISUAL
+       ========================================================= */
+
+    .sequence {
+      position: relative;
+
+      margin-bottom: 35px;
+    }
+
+    .sequence-title {
+      font-size: 9px;
+
+      letter-spacing: .13em;
+      text-transform: uppercase;
+
+      color: var(--muted);
+
+      margin-bottom: 20px;
+    }
+
+    .dna-line {
+      display: flex;
+
+      align-items: center;
+
+      gap: 4px;
+    }
+
+    .base {
+      width: 11px;
+      height: 11px;
+
+      border-radius: 50%;
+
+      background: #c1c0ba;
+    }
+
+    .base.methyl {
+      background: var(--accent);
+    }
+
+    .transformer-stack {
+      position: relative;
+
+      display: grid;
+      gap: 8px;
+    }
+
+    .transformer-layer {
+      padding: 14px 18px;
+
+      border:
+        1px solid var(--line);
+
+      display: flex;
+      justify-content: space-between;
+
+      font-size: 9px;
+
+      letter-spacing: .1em;
+      text-transform: uppercase;
+
+      background:
+        rgba(242,241,236,.9);
+    }
+
+
+    /* =========================================================
+       14. PUBLICATIONS / CONNECT
+       ========================================================= */
+
+    .connect-slide {
+      background: #151515;
+      color: var(--text-light);
+    }
+
+    .connect-slide .eyebrow,
+    .connect-slide .slide-index {
+      color: #888;
+    }
+
+    .connect-grid {
+      flex: 1;
+
+      display: grid;
+      grid-template-columns:
+        minmax(350px, .9fr)
+        minmax(0, 1.1fr);
+
+      gap: 8vw;
+
+      align-items: center;
+    }
+
+    .connect-title {
+      font-size:
+        clamp(70px, 10vw, 160px);
+
+      line-height: .78;
+      letter-spacing: -.08em;
+
+      text-transform: uppercase;
+    }
+
+    .connect-title span {
+      color: var(--accent);
+    }
+
+    .link-list {
+      border-top:
+        1px solid #3f3f3f;
+    }
+
+    .portal-link {
+      display: grid;
+
+      grid-template-columns:
+        1fr auto;
+
+      padding: 19px 0;
+
+      border-bottom:
+        1px solid #3f3f3f;
+
+      font-size:
+        clamp(18px, 2vw, 29px);
+
+      letter-spacing: -.02em;
+
+      transition:
+        padding-left .25s ease,
+        color .25s ease;
+    }
+
+    .portal-link:hover {
+      padding-left: 12px;
+      color: #ffffff;
+    }
+
+    .portal-note {
+      margin-top: 30px;
+
+      font-size: 11px;
+      line-height: 1.65;
+
+      color: #898989;
+    }
+
+
+    /* =========================================================
+       15. RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 900px) {
+
+      :root {
+        --pad-x: 25px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .page-counter {
+        display: none;
+      }
+
+      .slide {
+        padding-top: 90px;
+        padding-bottom: 35px;
+      }
+
+      .hero-grid,
+      .project-layout,
+      .connect-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .hero-panel {
+        align-self: auto;
+
+        border-left: 0;
+        border-top:
+          1px solid var(--line);
+
+        padding:
+          25px 0 0;
+      }
+
+      .identity-mark {
+        font-size: 60px;
+      }
+
+      .hero-title {
+        font-size:
+          clamp(55px, 17vw, 90px);
+      }
+
+      .hero-description {
+        margin-top: 23px;
+      }
+
+      .hero-meta {
+        display: none;
+      }
+
+      .project-menu-item {
+        grid-template-columns:
+          38px
+          1fr
+          auto;
+      }
+
+      .menu-description {
+        display: none;
+      }
+
+      .project-layout {
+        align-content: center;
+      }
+
+      .project-title {
+        font-size:
+          clamp(55px, 16vw, 90px);
+      }
+
+      .project-summary {
+        margin-top: 19px;
+      }
+
+      .visual-panel {
+        min-height: 30vh;
+      }
+
+      .connect-title {
+        font-size:
+          clamp(65px, 20vw, 110px);
+      }
+    }
+
+
+    @media (max-height: 720px) {
+
+      .slide {
+        min-height: 100vh;
+        padding-top: 82px;
+        padding-bottom: 30px;
+      }
+
+      .visual-panel {
+        min-height: 48vh;
+      }
+
+      .project-summary {
+        font-size: 15px;
+        margin-top: 18px;
+      }
+
+      .tag-row {
+        margin-top: 16px;
+      }
+
+      .project-links {
+        margin-top: 18px;
+      }
+    }
+
+  </style>
+
 </head>
+
+
 <body>
 
-<h1>Huanqi Wu</h1>
 
-<p>
-Undergraduate in Data Science<br>
-University of Arizona<br>
-Email: huanqiwu@arizona.edu
-</p>
+  <!-- =======================================================
+       FIXED UI
+       ======================================================= -->
 
-<div class="section">
-<h2>About</h2>
-<p>
-I am an undergraduate student in Data Science at the University of Arizona, 
-with research interests in statistical modeling, health epidemiology, 
-and genomics. My work focuses on applying rigorous statistical 
-methods to large-scale population data.
-</p>
-</div>
+  <header class="topbar">
 
-<div class="section">
-<h2>Research Interests</h2>
-<ul>
-<li>Statistical Inference</li>
-<li>Bayesian Methods</li>
-<li>Machine Learning</li>
-<li>Causal Modeling</li>
-</ul>
-</div>
+    <div
+      class="brand"
+      onclick="goToSlide(0)"
+    >
+      HUANQI WU
+    </div>
 
-<div class="section">
-<h2>Courses</h2>
-<ul>
-<li>MCB416 Bioinformatics and Functional Genomics Analysis</li>
-<li>ISTA410 Bayesian Modelling and Inference</li>
-<li>Math466 Theory of Statistics</li>
-<li>DATA474 Machine Learning</li>
-</ul>
-</div>
+    <nav class="nav-links">
 
-<div class="section">
-<h2>CV</h2>
-<p>
-<a href="Huanqi_Wu_CV(1).pdf" target="_blank">
-Download CV (PDF)
-</a>
-</p>
-</div>
+      <button onclick="goToSlide(1)">
+        Work
+      </button>
 
-<div class="section">
-<h2>Contact</h2>
-<p>
-GitHub: <a href="https://github.com/LionelWu11282562">LionelWu11282562</a>
-</p>
-</div>
+      <button onclick="goToSlide(5)">
+        Publications
+      </button>
+
+      <button onclick="goToSlide(6)">
+        Connect
+      </button>
+
+    </nav>
+
+  </header>
+
+
+  <div
+    class="page-counter"
+    id="pageCounter"
+  >
+    01 / 07
+  </div>
+
+
+  <div class="progress-track">
+    <div
+      class="progress-bar"
+      id="progressBar"
+    ></div>
+  </div>
+
+
+
+  <!-- =======================================================
+       DECK
+       ======================================================= -->
+
+  <main id="deck">
+
+
+    <!-- =====================================================
+         SLIDE 01 — COVER
+         ===================================================== -->
+
+    <section
+      class="slide hero active"
+      data-slide="0"
+    >
+
+      <div class="slide-inner">
+
+        <div class="eyebrow reveal">
+          Data Science · Statistics · Computational Research
+        </div>
+
+
+        <div class="hero-grid">
+
+          <div>
+
+            <h1 class="hero-title reveal delay-1">
+
+              DATA<br>
+
+              SCIENCE<br>
+
+              <span class="accent-word">
+                & RESEARCH
+              </span>
+
+            </h1>
+
+
+            <p class="hero-description reveal delay-2">
+
+              I build statistical and computational
+              methods for biomedical, population,
+              and complex real-world data.
+
+            </p>
+
+          </div>
+
+
+          <aside class="hero-panel reveal delay-3">
+
+            <div class="identity-mark">
+              H/W
+            </div>
+
+            <div class="hero-meta">
+
+              <div>
+                University of Arizona
+              </div>
+
+              <div>
+                Department of Mathematics
+              </div>
+
+              <div>
+                Data Science
+              </div>
+
+              <div>
+                Tucson, Arizona
+              </div>
+
+              <div>
+                Portfolio / 2026
+              </div>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+
+        <div class="hero-bottom reveal delay-4">
+
+          <div>
+            Huanqi Wu
+          </div>
+
+          <div class="scroll-hint">
+            Scroll to explore
+            <span class="scroll-arrow">↓</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SLIDE 02 — SELECTED WORK
+         ===================================================== -->
+
+    <section
+      class="slide overview"
+      data-slide="1"
+    >
+
+      <div class="slide-inner">
+
+        <div>
+
+          <div class="eyebrow reveal">
+            02 / Selected Work
+          </div>
+
+          <h2 class="overview-heading reveal delay-1">
+
+            Three projects.<br>
+
+            <span>
+              Three ways of turning
+              data into evidence.
+            </span>
+
+          </h2>
+
+        </div>
+
+
+        <div class="projects-menu reveal delay-2">
+
+          <button
+            class="project-menu-item"
+            onclick="goToSlide(2)"
+          >
+
+            <span class="menu-number">
+              01
+            </span>
+
+            <span class="menu-title">
+              PU-Boost
+            </span>
+
+            <span class="menu-description">
+              Machine learning for identifying
+              potentially undiagnosed hypertension.
+            </span>
+
+            <span class="menu-arrow">
+              →
+            </span>
+
+          </button>
+
+
+          <button
+            class="project-menu-item"
+            onclick="goToSlide(3)"
+          >
+
+            <span class="menu-number">
+              02
+            </span>
+
+            <span class="menu-title">
+              cfDNA Discovery
+            </span>
+
+            <span class="menu-description">
+              Automated GEO screening and
+              evidence extraction pipeline.
+            </span>
+
+            <span class="menu-arrow">
+              →
+            </span>
+
+          </button>
+
+
+          <button
+            class="project-menu-item"
+            onclick="goToSlide(4)"
+          >
+
+            <span class="menu-number">
+              03
+            </span>
+
+            <span class="menu-title">
+              MethylBERT
+            </span>
+
+            <span class="menu-description">
+              Transformer-based representation
+              learning for cfDNA methylation.
+            </span>
+
+            <span class="menu-arrow">
+              →
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SLIDE 03 — PROJECT 01
+         ===================================================== -->
+
+    <section
+      class="slide project-slide"
+      data-slide="2"
+    >
+
+      <div class="slide-inner">
+
+        <div class="project-layout">
+
+
+          <div>
+
+            <div class="project-kicker reveal">
+
+              <span>
+                Project 01
+              </span>
+
+              <span>
+                Machine Learning
+              </span>
+
+            </div>
+
+
+            <h2 class="project-title reveal delay-1">
+
+              PU-<br>
+              BOOST
+
+            </h2>
+
+
+            <p class="project-summary reveal delay-2">
+
+              Identifying potentially undiagnosed
+              hypertension through positive-unlabeled
+              learning, calibration and population-level
+              statistical modeling.
+
+            </p>
+
+
+            <div class="tag-row reveal delay-3">
+
+              <span class="tag">
+                Machine Learning
+              </span>
+
+              <span class="tag">
+                Epidemiology
+              </span>
+
+              <span class="tag">
+                Statistics
+              </span>
+
+            </div>
+
+
+            <div class="project-links reveal delay-4">
+
+              <!-- Replace # later -->
+
+              <a
+                class="text-link"
+                href="#"
+              >
+                Case Study ↗
+              </a>
+
+              <a
+                class="text-link"
+                href="#"
+              >
+                GitHub ↗
+              </a>
+
+              <a
+                class="text-link"
+                href="#"
+              >
+                Research ↗
+              </a>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="visual-panel reveal delay-2">
+
+            <div class="visual-label">
+
+              <span>
+                Model Overview
+              </span>
+
+              <span>
+                PU / 01
+              </span>
+
+            </div>
+
+
+            <div class="metrics">
+
+              <div class="metric">
+
+                <div class="metric-value">
+                  25,883
+                </div>
+
+                <div class="metric-label">
+                  Training subjects
+                </div>
+
+              </div>
+
+
+              <div class="metric">
+
+                <div class="metric-value">
+                  .682
+                </div>
+
+                <div class="metric-label">
+                  Model AUC
+                </div>
+
+              </div>
+
+
+              <div class="metric">
+
+                <div class="metric-value">
+                  5,313
+                </div>
+
+                <div class="metric-label">
+                  Positive labels
+                </div>
+
+              </div>
+
+
+              <div class="metric">
+
+                <div class="metric-value">
+                  18,426
+                </div>
+
+                <div class="metric-label">
+                  Unlabeled cases
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="pu-flow">
+
+              <div class="node">
+                P
+              </div>
+
+              <div class="flow-line"></div>
+
+              <div class="node">
+                U
+              </div>
+
+              <div class="flow-line"></div>
+
+              <div class="node highlight">
+                ML
+              </div>
+
+              <div class="flow-line"></div>
+
+              <div class="node">
+                CASE
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SLIDE 04 — PROJECT 02
+         ===================================================== -->
+
+    <section
+      class="slide project-slide"
+      data-slide="3"
+    >
+
+      <div class="slide-inner">
+
+        <div class="project-layout">
+
+
+          <div>
+
+            <div class="project-kicker reveal">
+
+              <span>
+                Project 02
+              </span>
+
+              <span>
+                Bioinformatics
+              </span>
+
+            </div>
+
+
+            <h2 class="project-title reveal delay-1">
+
+              cfDNA<br>
+              DISCOVERY
+
+            </h2>
+
+
+            <p class="project-summary reveal delay-2">
+
+              An automated research pipeline for discovering,
+              screening and organizing cfDNA studies across
+              GEO and PubMed while preserving a reproducible
+              evidence chain.
+
+            </p>
+
+
+            <div class="tag-row reveal delay-3">
+
+              <span class="tag">
+                Python
+              </span>
+
+              <span class="tag">
+                NCBI GEO
+              </span>
+
+              <span class="tag">
+                PubMed
+              </span>
+
+              <span class="tag">
+                Automation
+              </span>
+
+            </div>
+
+
+            <div class="project-links reveal delay-4">
+
+              <a
+                class="text-link"
+                href="#"
+              >
+                Case Study ↗
+              </a>
+
+              <a
+                class="text-link"
+                href="#"
+              >
+                GitHub ↗
+              </a>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="visual-panel reveal delay-2">
+
+            <div class="visual-label">
+
+              <span>
+                Discovery Pipeline
+              </span>
+
+              <span>
+                GEO / PUBMED
+              </span>
+
+            </div>
+
+
+            <div class="pipeline">
+
+              <div class="pipeline-row">
+
+                <span class="pipeline-index">
+                  01
+                </span>
+
+                <strong>
+                  4,939
+                </strong>
+
+                <span class="pipeline-result">
+                  Initial records
+                </span>
+
+              </div>
+
+
+              <div class="pipeline-row">
+
+                <span class="pipeline-index">
+                  02
+                </span>
+
+                <strong>
+                  ↓
+                </strong>
+
+                <span class="pipeline-result">
+                  Automated screening
+                </span>
+
+              </div>
+
+
+              <div class="pipeline-row">
+
+                <span class="pipeline-index">
+                  03
+                </span>
+
+                <strong>
+                  Evidence
+                </strong>
+
+                <span class="pipeline-result">
+                  Classification
+                </span>
+
+              </div>
+
+
+              <div class="pipeline-row final">
+
+                <span class="pipeline-index">
+                  04
+                </span>
+
+                <strong>
+                  277
+                </strong>
+
+                <span class="pipeline-result">
+                  Selected studies
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="visual-label">
+
+              <span>
+                Search
+              </span>
+
+              <span>
+                Screen
+              </span>
+
+              <span>
+                Validate
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SLIDE 05 — PROJECT 03
+         ===================================================== -->
+
+    <section
+      class="slide project-slide"
+      data-slide="4"
+    >
+
+      <div class="slide-inner">
+
+        <div class="project-layout">
+
+
+          <div>
+
+            <div class="project-kicker reveal">
+
+              <span>
+                Project 03
+              </span>
+
+              <span>
+                Deep Learning
+              </span>
+
+            </div>
+
+
+            <h2 class="project-title reveal delay-1">
+
+              METHYL<br>
+              BERT
+
+            </h2>
+
+
+            <p class="project-summary reveal delay-2">
+
+              Transformer-based representation learning
+              for cfDNA methylation sequencing, using
+              masked methylation sites and read-level
+              prediction followed by sample aggregation.
+
+            </p>
+
+
+            <div class="tag-row reveal delay-3">
+
+              <span class="tag">
+                Transformer
+              </span>
+
+              <span class="tag">
+                Genomics
+              </span>
+
+              <span class="tag">
+                cfDNA
+              </span>
+
+              <span class="tag">
+                Deep Learning
+              </span>
+
+            </div>
+
+
+            <div class="project-links reveal delay-4">
+
+              <a
+                class="text-link"
+                href="#"
+              >
+                Case Study ↗
+              </a>
+
+              <a
+                class="text-link"
+                href="#"
+              >
+                GitHub ↗
+              </a>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="visual-panel reveal delay-2">
+
+            <div class="visual-label">
+
+              <span>
+                Representation Pipeline
+              </span>
+
+              <span>
+                500 BP
+              </span>
+
+            </div>
+
+
+            <div class="sequence">
+
+              <div class="sequence-title">
+                cfDNA read / methylation sites
+              </div>
+
+
+              <div class="dna-line">
+
+                <span class="base"></span>
+                <span class="base methyl"></span>
+                <span class="base"></span>
+                <span class="base"></span>
+                <span class="base methyl"></span>
+                <span class="base"></span>
+                <span class="base"></span>
+                <span class="base"></span>
+                <span class="base methyl"></span>
+                <span class="base"></span>
+                <span class="base"></span>
+                <span class="base methyl"></span>
+                <span class="base"></span>
+                <span class="base"></span>
+                <span class="base"></span>
+                <span class="base methyl"></span>
+                <span class="base"></span>
+                <span class="base"></span>
+
+              </div>
+
+            </div>
+
+
+            <div class="transformer-stack">
+
+              <div class="transformer-layer">
+
+                <span>
+                  01
+                </span>
+
+                <span>
+                  Methylation Masking
+                </span>
+
+              </div>
+
+
+              <div class="transformer-layer">
+
+                <span>
+                  02
+                </span>
+
+                <span>
+                  Transformer Encoder
+                </span>
+
+              </div>
+
+
+              <div class="transformer-layer">
+
+                <span>
+                  03
+                </span>
+
+                <span>
+                  Read Classification
+                </span>
+
+              </div>
+
+
+              <div class="transformer-layer">
+
+                <span>
+                  04
+                </span>
+
+                <span>
+                  Sample Aggregation
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SLIDE 06 — PUBLICATIONS
+         ===================================================== -->
+
+    <section
+      class="slide overview"
+      data-slide="5"
+    >
+
+      <div class="slide-inner">
+
+
+        <div>
+
+          <div class="eyebrow reveal">
+            06 / Publications & Research
+          </div>
+
+
+          <h2 class="overview-heading reveal delay-1">
+
+            Research is not<br>
+
+            <span>
+              finished at the model.
+            </span>
+
+          </h2>
+
+        </div>
+
+
+
+        <div class="projects-menu reveal delay-2">
+
+
+          <a
+            class="project-menu-item"
+            href="#"
+            target="_blank"
+          >
+
+            <span class="menu-number">
+              01
+            </span>
+
+            <span class="menu-title">
+              Selected Publication
+            </span>
+
+            <span class="menu-description">
+              Population health and healthcare-seeking
+              behavior research.
+            </span>
+
+            <span class="menu-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+
+          <a
+            class="project-menu-item"
+            href="#"
+            target="_blank"
+          >
+
+            <span class="menu-number">
+              02
+            </span>
+
+            <span class="menu-title">
+              Google Scholar
+            </span>
+
+            <span class="menu-description">
+              Complete publication and citation record.
+            </span>
+
+            <span class="menu-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+
+          <a
+            class="project-menu-item"
+            href="Huanqi_Wu_CV(1).pdf"
+            target="_blank"
+          >
+
+            <span class="menu-number">
+              03
+            </span>
+
+            <span class="menu-title">
+              Curriculum Vitae
+            </span>
+
+            <span class="menu-description">
+              Education, research, publications
+              and professional experience.
+            </span>
+
+            <span class="menu-arrow">
+              ↗
+            </span>
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SLIDE 07 — CONNECT
+         ===================================================== -->
+
+    <section
+      class="slide connect-slide"
+      data-slide="6"
+    >
+
+      <div class="slide-inner">
+
+
+        <div class="eyebrow reveal">
+          07 / Explore
+        </div>
+
+
+        <div class="connect-grid">
+
+
+          <div>
+
+            <h2 class="connect-title reveal delay-1">
+
+              HUANQI<br>
+              <span>WU.</span>
+
+            </h2>
+
+
+            <p class="portal-note reveal delay-2">
+
+              Data Science · Statistics<br>
+              Computational Research<br><br>
+
+              University of Arizona<br>
+              Tucson, Arizona
+
+            </p>
+
+          </div>
+
+
+
+          <div class="link-list reveal delay-2">
+
+
+            <a
+              class="portal-link"
+              href="Huanqi_Wu_CV(1).pdf"
+              target="_blank"
+            >
+              <span>
+                Curriculum Vitae
+              </span>
+
+              <span>
+                ↗
+              </span>
+            </a>
+
+
+            <!-- Replace # with Scholar URL -->
+
+            <a
+              class="portal-link"
+              href="#"
+              target="_blank"
+            >
+              <span>
+                Google Scholar
+              </span>
+
+              <span>
+                ↗
+              </span>
+            </a>
+
+
+            <a
+              class="portal-link"
+              href="https://github.com/LionelWu11282562"
+              target="_blank"
+            >
+              <span>
+                GitHub
+              </span>
+
+              <span>
+                ↗
+              </span>
+            </a>
+
+
+            <!-- Replace # later -->
+
+            <a
+              class="portal-link"
+              href="#"
+              target="_blank"
+            >
+              <span>
+                ResearchGate
+              </span>
+
+              <span>
+                ↗
+              </span>
+            </a>
+
+
+            <!-- Replace # later -->
+
+            <a
+              class="portal-link"
+              href="#"
+              target="_blank"
+            >
+              <span>
+                LinkedIn
+              </span>
+
+              <span>
+                ↗
+              </span>
+            </a>
+
+
+            <a
+              class="portal-link"
+              href="mailto:huanqiwu@arizona.edu"
+            >
+              <span>
+                huanqiwu@arizona.edu
+              </span>
+
+              <span>
+                ↗
+              </span>
+            </a>
+
+
+          </div>
+
+        </div>
+
+
+        <div class="visual-label reveal delay-3">
+
+          <span>
+            University of Arizona
+          </span>
+
+          <span>
+            © 2026 Huanqi Wu
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================= -->
+
+  <script>
+
+    const deck =
+      document.getElementById("deck");
+
+    const slides =
+      document.querySelectorAll(".slide");
+
+    const progressBar =
+      document.getElementById("progressBar");
+
+    const pageCounter =
+      document.getElementById("pageCounter");
+
+
+    let currentSlide = 0;
+
+    let wheelLocked = false;
+
+    let touchStartY = 0;
+
+
+
+    /* -------------------------------------------------------
+       GO TO SLIDE
+       ------------------------------------------------------- */
+
+    function goToSlide(index) {
+
+      index =
+        Math.max(
+          0,
+          Math.min(
+            index,
+            slides.length - 1
+          )
+        );
+
+
+      currentSlide = index;
+
+
+      deck.style.transform =
+        `translateY(-${currentSlide * 100}vh)`;
+
+
+      slides.forEach(
+        (slide, i) => {
+
+          slide.classList.toggle(
+            "active",
+            i === currentSlide
+          );
+
+        }
+      );
+
+
+      const current =
+        String(
+          currentSlide + 1
+        ).padStart(2, "0");
+
+
+      const total =
+        String(
+          slides.length
+        ).padStart(2, "0");
+
+
+      pageCounter.textContent =
+        `${current} / ${total}`;
+
+
+      progressBar.style.width =
+        `${
+          (
+            (currentSlide + 1)
+            /
+            slides.length
+          )
+          * 100
+        }%`;
+
+    }
+
+
+
+    /* -------------------------------------------------------
+       MOUSE WHEEL
+       ------------------------------------------------------- */
+
+    window.addEventListener(
+
+      "wheel",
+
+      (event) => {
+
+        if (wheelLocked) {
+          return;
+        }
+
+
+        if (
+          Math.abs(event.deltaY) < 20
+        ) {
+          return;
+        }
+
+
+        wheelLocked = true;
+
+
+        if (
+          event.deltaY > 0
+        ) {
+
+          goToSlide(
+            currentSlide + 1
+          );
+
+        } else {
+
+          goToSlide(
+            currentSlide - 1
+          );
+
+        }
+
+
+        setTimeout(
+          () => {
+            wheelLocked = false;
+          },
+          950
+        );
+
+      },
+
+      {
+        passive: true
+      }
+
+    );
+
+
+
+    /* -------------------------------------------------------
+       KEYBOARD
+       ------------------------------------------------------- */
+
+    window.addEventListener(
+
+      "keydown",
+
+      (event) => {
+
+        const nextKeys = [
+          "ArrowDown",
+          "ArrowRight",
+          "PageDown",
+          " "
+        ];
+
+        const previousKeys = [
+          "ArrowUp",
+          "ArrowLeft",
+          "PageUp"
+        ];
+
+
+        if (
+          nextKeys.includes(
+            event.key
+          )
+        ) {
+
+          event.preventDefault();
+
+          goToSlide(
+            currentSlide + 1
+          );
+
+        }
+
+
+        if (
+          previousKeys.includes(
+            event.key
+          )
+        ) {
+
+          event.preventDefault();
+
+          goToSlide(
+            currentSlide - 1
+          );
+
+        }
+
+
+        if (
+          event.key === "Home"
+        ) {
+
+          goToSlide(0);
+
+        }
+
+
+        if (
+          event.key === "End"
+        ) {
+
+          goToSlide(
+            slides.length - 1
+          );
+
+        }
+
+      }
+
+    );
+
+
+
+    /* -------------------------------------------------------
+       TOUCH / MOBILE SWIPE
+       ------------------------------------------------------- */
+
+    window.addEventListener(
+
+      "touchstart",
+
+      (event) => {
+
+        touchStartY =
+          event.touches[0].clientY;
+
+      },
+
+      {
+        passive: true
+      }
+
+    );
+
+
+    window.addEventListener(
+
+      "touchend",
+
+      (event) => {
+
+        const touchEndY =
+          event.changedTouches[0].clientY;
+
+
+        const difference =
+          touchStartY - touchEndY;
+
+
+        if (
+          Math.abs(difference) < 50
+        ) {
+          return;
+        }
+
+
+        if (
+          difference > 0
+        ) {
+
+          goToSlide(
+            currentSlide + 1
+          );
+
+        } else {
+
+          goToSlide(
+            currentSlide - 1
+          );
+
+        }
+
+      },
+
+      {
+        passive: true
+      }
+
+    );
+
+
+
+    /* -------------------------------------------------------
+       INITIAL STATE
+       ------------------------------------------------------- */
+
+    goToSlide(0);
+
+  </script>
+
 
 </body>
 </html>
