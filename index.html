@@ -5300,6 +5300,287 @@
     }
 
 
+    /* =========================================================
+       PERSONAL BRAND MARK SYSTEM
+       Uses assets/images/huanqiwu.png
+       ========================================================= */
+
+    /* ---------- PAGE 01 / PORTRAIT BRAND MARK ---------- */
+
+    .portrait-brand-mark {
+      position: absolute;
+      z-index: 3;
+
+      left: 18px;
+      bottom: 17px;
+
+      width: 58px;
+      height: 58px;
+
+      padding: 5px;
+
+      border:
+        1px solid rgba(255,255,255,.52);
+
+      border-radius: 50%;
+
+      background:
+        rgba(247,247,244,.88);
+
+      box-shadow:
+        0 8px 24px rgba(0,0,0,.16);
+
+      backdrop-filter:
+        blur(7px);
+
+      overflow: hidden;
+
+      transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+    }
+
+    .portrait-brand-mark:hover {
+      transform:
+        translateY(-2px)
+        scale(1.03);
+
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.20);
+    }
+
+    .portrait-brand-mark img {
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      border-radius: 50%;
+    }
+
+
+    /* ---------- PAGES 03–06 / ULTRA-FAINT WATERMARK ---------- */
+
+    .project-watermark {
+      position: absolute;
+      z-index: 0;
+
+      right: -4vw;
+      bottom: -10vh;
+
+      width:
+        clamp(430px, 44vw, 780px);
+
+      aspect-ratio: 1 / 1;
+
+      pointer-events: none;
+      user-select: none;
+
+      opacity: .030;
+
+      mix-blend-mode:
+        multiply;
+
+      filter:
+        saturate(.78)
+        contrast(.96);
+
+      transform:
+        rotate(-4deg);
+    }
+
+    .project-watermark img {
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+    }
+
+    /* Slight positional variation keeps the four pages parallel
+       without making the watermark feel mechanically repeated. */
+
+    .project-slide[data-slide="3"] .project-watermark {
+      right: auto;
+      left: -7vw;
+      bottom: -13vh;
+
+      transform:
+        rotate(5deg);
+    }
+
+    .project-slide[data-slide="4"] .project-watermark {
+      right: -8vw;
+      bottom: -15vh;
+
+      transform:
+        rotate(3deg);
+    }
+
+    .project-slide[data-slide="5"] .project-watermark {
+      right: auto;
+      left: -5vw;
+      bottom: -12vh;
+
+      transform:
+        rotate(-5deg);
+    }
+
+    /* Existing content stays above the watermark. */
+
+    .project-slide > .slide-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+
+    /* ---------- PAGE 09 / UPPER-LEFT BRAND LOCKUP ---------- */
+
+    .connect-topline {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 28px;
+    }
+
+    .connect-brand-lockup {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 13px;
+
+      min-width: 0;
+    }
+
+    .connect-brand-icon {
+      flex:
+        0 0 auto;
+
+      width: 43px;
+      height: 43px;
+
+      padding: 3px;
+
+      border:
+        1px solid rgba(255,255,255,.20);
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.94);
+
+      box-shadow:
+        0 8px 28px rgba(0,0,0,.16);
+
+      overflow: hidden;
+    }
+
+    .connect-brand-icon img {
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      border-radius: 50%;
+    }
+
+    .connect-brand-copy {
+      display: flex;
+      flex-direction: column;
+
+      gap: 4px;
+
+      min-width: 0;
+    }
+
+    .connect-brand-copy strong {
+      font-size: 11px;
+      font-weight: 700;
+
+      line-height: 1;
+
+      letter-spacing: .11em;
+
+      text-transform: uppercase;
+
+      color: #ffffff;
+    }
+
+    .connect-brand-copy span {
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      font-size: 7.5px;
+
+      line-height: 1.35;
+      letter-spacing: .095em;
+
+      text-transform: uppercase;
+
+      color: rgba(255,255,255,.50);
+    }
+
+    .connect-topline .eyebrow {
+      flex:
+        0 0 auto;
+
+      margin-left: auto;
+    }
+
+
+    /* ---------- RESPONSIVE BRAND MARK ADJUSTMENTS ---------- */
+
+    @media (max-width: 900px) {
+
+      .portrait-brand-mark {
+        left: 13px;
+        bottom: 13px;
+
+        width: 48px;
+        height: 48px;
+
+        padding: 4px;
+      }
+
+      .project-watermark {
+        width:
+          clamp(300px, 76vw, 520px);
+
+        right: -20vw;
+        bottom: -6vh;
+
+        opacity: .024;
+      }
+
+      .project-slide[data-slide="3"] .project-watermark,
+      .project-slide[data-slide="5"] .project-watermark {
+        left: -24vw;
+      }
+
+      .connect-brand-icon {
+        width: 37px;
+        height: 37px;
+      }
+
+      .connect-brand-copy span {
+        display: none;
+      }
+
+      .connect-topline {
+        gap: 16px;
+      }
+    }
+
+
   </style>
 
 </head>
@@ -5446,6 +5727,18 @@
                 alt="Portrait of Huanqi Wu"
                 class="portrait-image"
               >
+
+
+              <a
+                class="portrait-brand-mark"
+                href="https://huanqiwu.com/"
+                aria-label="Huanqi Wu personal research site"
+              >
+                <img
+                  src="assets/images/huanqiwu.png"
+                  alt="Huanqi Wu research mark"
+                >
+              </a>
 
 
               <div class="portrait-caption">
@@ -5833,7 +6126,15 @@
       data-slide="2"
     >
 
-      <div class="slide-inner">
+      
+      <div class="project-watermark" aria-hidden="true">
+        <img
+          src="assets/images/huanqiwu.png"
+          alt=""
+        >
+      </div>
+
+<div class="slide-inner">
 
         <div class="project-layout project-gallery-layout">
 
@@ -6055,7 +6356,15 @@
       data-slide="3"
     >
 
-      <div class="slide-inner">
+      
+      <div class="project-watermark" aria-hidden="true">
+        <img
+          src="assets/images/huanqiwu.png"
+          alt=""
+        >
+      </div>
+
+<div class="slide-inner">
 
         <div class="project-layout project-gallery-layout">
 
@@ -6257,7 +6566,15 @@
       data-slide="4"
     >
 
-      <div class="slide-inner">
+      
+      <div class="project-watermark" aria-hidden="true">
+        <img
+          src="assets/images/huanqiwu.png"
+          alt=""
+        >
+      </div>
+
+<div class="slide-inner">
 
         <div class="project-layout project-gallery-layout">
 
@@ -6455,7 +6772,15 @@
       data-slide="5"
     >
 
-      <div class="slide-inner">
+      
+      <div class="project-watermark" aria-hidden="true">
+        <img
+          src="assets/images/huanqiwu.png"
+          alt=""
+        >
+      </div>
+
+<div class="slide-inner">
 
         <div class="project-layout project-gallery-layout">
 
@@ -7224,8 +7549,34 @@
       <div class="slide-inner">
 
 
-        <div class="eyebrow reveal">
-          09 / Explore
+        <div class="connect-topline reveal">
+
+          <div class="connect-brand-lockup">
+
+            <div class="connect-brand-icon">
+              <img
+                src="assets/images/huanqiwu.png"
+                alt="Huanqi Wu research mark"
+              >
+            </div>
+
+            <div class="connect-brand-copy">
+              <strong>
+                Huanqi Wu
+              </strong>
+
+              <span>
+                Data Science · Biomedical Research
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="eyebrow">
+            09 / Explore
+          </div>
+
         </div>
 
 
