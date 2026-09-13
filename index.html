@@ -5581,6 +5581,187 @@
     }
 
 
+    /* =========================================================
+       BRAND MARK ZOOM INTERACTION
+       Hover enlarges in place; click opens a focused lightbox.
+       ========================================================= */
+
+    .portrait-brand-mark,
+    .connect-brand-icon {
+      cursor: zoom-in;
+      transform-origin: center;
+    }
+
+    .portrait-brand-mark {
+      transition:
+        transform .30s cubic-bezier(.16,1,.3,1),
+        box-shadow .30s ease;
+    }
+
+    .portrait-brand-mark:hover,
+    .portrait-brand-mark:focus-visible {
+      transform:
+        translateY(-3px)
+        scale(1.12);
+
+      box-shadow:
+        0 16px 38px rgba(0,0,0,.24);
+
+      outline: none;
+    }
+
+    .connect-brand-icon {
+      transition:
+        transform .30s cubic-bezier(.16,1,.3,1),
+        box-shadow .30s ease,
+        border-color .30s ease;
+    }
+
+    .connect-brand-icon:hover,
+    .connect-brand-icon:focus-visible {
+      transform:
+        translateY(-3px)
+        scale(1.14);
+
+      border-color:
+        rgba(255,255,255,.42);
+
+      box-shadow:
+        0 16px 42px rgba(0,0,0,.28);
+
+      outline: none;
+    }
+
+    .brandmark-lightbox {
+      position: fixed;
+      z-index: 5000;
+
+      inset: 0;
+
+      display: grid;
+      place-items: center;
+
+      padding: 30px;
+
+      background:
+        rgba(7, 13, 24, .78);
+
+      backdrop-filter:
+        blur(14px);
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+
+      transition:
+        opacity .28s ease,
+        visibility .28s ease;
+    }
+
+    .brandmark-lightbox.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .brandmark-lightbox-card {
+      position: relative;
+
+      width:
+        min(72vmin, 680px);
+
+      aspect-ratio: 1 / 1;
+
+      padding: 18px;
+
+      border:
+        1px solid rgba(255,255,255,.22);
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.96);
+
+      box-shadow:
+        0 34px 100px rgba(0,0,0,.38);
+
+      transform:
+        scale(.88);
+
+      transition:
+        transform .34s cubic-bezier(.16,1,.3,1);
+    }
+
+    .brandmark-lightbox.open .brandmark-lightbox-card {
+      transform:
+        scale(1);
+    }
+
+    .brandmark-lightbox-card img {
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      border-radius: 50%;
+    }
+
+    .brandmark-lightbox-close {
+      position: absolute;
+
+      top: -10px;
+      right: -10px;
+
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      border: 0;
+      border-radius: 50%;
+
+      background: #ffffff;
+      color: #111111;
+
+      font-size: 22px;
+      line-height: 1;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 9px 26px rgba(0,0,0,.22);
+
+      transition:
+        transform .2s ease;
+    }
+
+    .brandmark-lightbox-close:hover {
+      transform:
+        scale(1.08);
+    }
+
+    @media (max-width: 900px) {
+
+      .brandmark-lightbox-card {
+        width:
+          min(82vw, 520px);
+
+        padding: 12px;
+      }
+
+      .portrait-brand-mark:hover,
+      .portrait-brand-mark:focus-visible,
+      .connect-brand-icon:hover,
+      .connect-brand-icon:focus-visible {
+        transform:
+          scale(1.08);
+      }
+    }
+
+
   </style>
 
 </head>
@@ -5732,7 +5913,9 @@
               <a
                 class="portrait-brand-mark"
                 href="https://huanqiwu.com/"
-                aria-label="Huanqi Wu personal research site"
+                aria-label="Enlarge Huanqi Wu research mark"
+                data-logo-zoom
+                role="button"
               >
                 <img
                   src="assets/images/huanqiwu.png"
@@ -7553,7 +7736,13 @@
 
           <div class="connect-brand-lockup">
 
-            <div class="connect-brand-icon">
+            <div
+              class="connect-brand-icon"
+              data-logo-zoom
+              role="button"
+              tabindex="0"
+              aria-label="Enlarge Huanqi Wu research mark"
+            >
               <img
                 src="assets/images/huanqiwu.png"
                 alt="Huanqi Wu research mark"
@@ -7732,6 +7921,42 @@
 
   </main>
 
+
+
+  <!-- =======================================================
+       BRAND MARK LIGHTBOX
+       ======================================================= -->
+
+  <div
+    class="brandmark-lightbox"
+    id="brandmarkLightbox"
+    aria-hidden="true"
+  >
+
+    <div
+      class="brandmark-lightbox-card"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Huanqi Wu research mark"
+    >
+
+      <img
+        src="assets/images/huanqiwu.png"
+        alt="Huanqi Wu research mark"
+      >
+
+      <button
+        class="brandmark-lightbox-close"
+        id="brandmarkLightboxClose"
+        type="button"
+        aria-label="Close enlarged research mark"
+      >
+        ×
+      </button>
+
+    </div>
+
+  </div>
 
 
   <!-- =======================================================
@@ -8027,6 +8252,142 @@
 
       {
         passive: true
+      }
+
+    );
+
+
+
+    /* -------------------------------------------------------
+       BRAND MARK ZOOM / LIGHTBOX
+       ------------------------------------------------------- */
+
+    const brandmarkLightbox =
+      document.getElementById("brandmarkLightbox");
+
+    const brandmarkLightboxClose =
+      document.getElementById("brandmarkLightboxClose");
+
+    const brandmarkZoomTriggers =
+      document.querySelectorAll("[data-logo-zoom]");
+
+
+    function openBrandmarkLightbox() {
+
+      brandmarkLightbox.classList.add("open");
+
+      brandmarkLightbox.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+    }
+
+
+    function closeBrandmarkLightbox() {
+
+      brandmarkLightbox.classList.remove("open");
+
+      brandmarkLightbox.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+    }
+
+
+    brandmarkZoomTriggers.forEach(
+
+      (trigger) => {
+
+        trigger.addEventListener(
+
+          "click",
+
+          (event) => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            openBrandmarkLightbox();
+
+          }
+
+        );
+
+
+        trigger.addEventListener(
+
+          "keydown",
+
+          (event) => {
+
+            if (
+              event.key === "Enter"
+              ||
+              event.key === " "
+            ) {
+
+              event.preventDefault();
+
+              openBrandmarkLightbox();
+
+            }
+
+          }
+
+        );
+
+      }
+
+    );
+
+
+    brandmarkLightboxClose.addEventListener(
+
+      "click",
+
+      closeBrandmarkLightbox
+
+    );
+
+
+    brandmarkLightbox.addEventListener(
+
+      "click",
+
+      (event) => {
+
+        if (
+          event.target === brandmarkLightbox
+        ) {
+
+          closeBrandmarkLightbox();
+
+        }
+
+      }
+
+    );
+
+
+    window.addEventListener(
+
+      "keydown",
+
+      (event) => {
+
+        if (
+          event.key === "Escape"
+          &&
+          brandmarkLightbox.classList.contains("open")
+        ) {
+
+          closeBrandmarkLightbox();
+
+        }
+
       }
 
     );
