@@ -9196,6 +9196,306 @@
     }
 
 
+  
+
+    /* =========================================================
+       PAGE 01 / RESPONSIVE HERO — THREE LOGICAL MODES
+       ---------------------------------------------------------
+       Mode A: Large desktop      > 1440px
+               Uses the existing/base design unchanged.
+
+       Mode B: Compact desktop    901px–1440px
+               Same composition, but proportions are rebalanced
+               for laptops and smaller browser windows.
+
+       Mode C: Mobile / tablet    <= 900px
+               Uses the existing mobile rules already defined
+               elsewhere in this stylesheet.
+
+       IMPORTANT:
+       This is still ONE page / ONE HTML structure.
+       Only CSS values change at different viewport widths.
+       ========================================================= */
+
+
+    /* Keep the editorial content above the decorative footer layer.
+       No visual change; this also keeps the three action links fully clickable. */
+    .hero-editorial {
+      z-index: 20;
+    }
+
+
+    /* =========================================================
+       MODE B — COMPACT DESKTOP / LAPTOP
+       901px–1440px
+       ========================================================= */
+
+    @media (max-width: 1440px) and (min-width: 901px) {
+
+      /* ---------- EDITORIAL COLUMN ---------- */
+
+      .hero-editorial {
+        width: min(57vw, 800px);
+
+        margin-top:
+          clamp(54px, 7.4vh, 92px);
+      }
+
+      .hero-profile-kicker {
+        margin-bottom: 14px;
+
+        font-size: 8.5px;
+      }
+
+      .hero-title-v2 {
+        max-width: 790px;
+
+        font-size:
+          clamp(54px, 6vw, 92px);
+
+        line-height: .84;
+      }
+
+      .hero-description-v2 {
+        max-width: 520px;
+
+        margin-top: 24px;
+
+        font-size:
+          clamp(14px, 1.05vw, 17px);
+
+        line-height: 1.5;
+      }
+
+
+      /* ---------- IDENTITY / LINKS ---------- */
+
+      .hero-identity-v2 {
+        width: min(56vw, 760px);
+
+        margin-top: 25px;
+        padding-top: 14px;
+
+        grid-template-columns:
+          minmax(0, 1fr)
+          minmax(210px, 232px);
+
+        column-gap: 14px;
+      }
+
+      .hero-name-row-v2 {
+        gap: 8px 15px;
+      }
+
+      .hero-name-row-v2 strong {
+        font-size:
+          clamp(23px, 1.8vw, 30px);
+      }
+
+      .hero-name-row-v2 span {
+        font-size:
+          clamp(17.5px, 1.3vw, 21.5px);
+      }
+
+      .hero-meta-v2.hero-ua-identity {
+        margin-top: 10px;
+      }
+
+      .hero-meta-v2.hero-ua-identity .hero-ua-school {
+        font-size:
+          clamp(15px, 1.13vw, 18px);
+      }
+
+      .hero-meta-v2.hero-ua-identity .hero-ua-department {
+        font-size:
+          clamp(11px, .82vw, 13.5px);
+      }
+
+      .hero-meta-v2.hero-ua-identity .hero-ua-field {
+        font-size:
+          clamp(8.5px, .64vw, 10.5px);
+      }
+
+      .hero-actions-v2 {
+        transform:
+          translateX(-10px);
+
+        padding-left: 13px;
+      }
+
+      .hero-action-v2 {
+        min-height: 42px;
+
+        padding:
+          0 30px
+          0 37px;
+
+        font-size: 9.4px;
+      }
+
+      .hero-action-v2::before {
+        left: 8px;
+
+        font-size: 7.5px;
+      }
+
+      .hero-action-v2::after {
+        right: 7px !important;
+
+        font-size: 13.5px;
+      }
+
+      .hero-action-v2:hover,
+      .hero-action-v2:focus-visible {
+        padding-left: 41px;
+      }
+
+
+      /* ---------- ARIZONA-BLUE FIELD ---------- */
+
+      .hero::before {
+        right: -4vw;
+
+        width: 42vw;
+
+        top: 8.6vh;
+        height: 92vh;
+      }
+
+      /* Keep the red vertical accent aligned with
+         the new left edge of the blue field. */
+      .hero::after {
+        right: 37.7vw;
+
+        top: 17vh;
+      }
+
+
+      /* ---------- PORTRAIT ---------- */
+
+      .hero-portrait-stage {
+        right: -3vw;
+        bottom: -4.5vh;
+
+        width: 45vw;
+        height: 91vh;
+      }
+
+      .hero-cutout {
+        right: -1.3vw;
+
+        bottom: 9vh;
+
+        height:
+          min(68vh, 660px);
+      }
+
+      .hero-portrait-word {
+        right: 1vw;
+        top: 8vh;
+
+        font-size:
+          clamp(58px, 6.7vw, 102px);
+      }
+
+      .hero-visual-meta {
+        right: 1.4vw;
+        top: 4.4vh;
+
+        max-width: 195px;
+
+        font-size: 7.4px;
+      }
+
+      .hero-visual-meta strong {
+        font-size: 8.4px;
+      }
+
+
+      /* ---------- CURVED PAGE TRANSITION ---------- */
+
+      .hero-next-transition {
+        right: -4vw;
+
+        width: 42vw;
+
+        height: 12.4vh;
+        min-height: 90px;
+      }
+
+      .hero-next-transition::before {
+        left: -10px;
+        top: -11px;
+
+        filter:
+          blur(11px);
+      }
+
+      .hero-next-transition::after {
+        left: -17px;
+        top: -17px;
+
+        filter:
+          blur(17px);
+      }
+
+
+      /* ---------- SMALL FOOTER ---------- */
+
+      .hero-bottom-v2 {
+        font-size: 7.8px;
+      }
+
+    }
+
+
+    /* =========================================================
+       EXTRA COMPRESSION FOR SHORT LAPTOP SCREENS
+       This is NOT a separate mode; it is only a height refinement
+       inside the compact-desktop layout.
+       ========================================================= */
+
+    @media (max-width: 1440px)
+           and (min-width: 901px)
+           and (max-height: 780px) {
+
+      .hero-editorial {
+        margin-top: 4.8vh;
+      }
+
+      .hero-title-v2 {
+        font-size:
+          clamp(50px, 5.45vw, 82px);
+      }
+
+      .hero-description-v2 {
+        margin-top: 17px;
+      }
+
+      .hero-identity-v2 {
+        margin-top: 18px;
+        padding-top: 11px;
+      }
+
+      .hero-action-v2 {
+        min-height: 38px;
+      }
+
+      .hero-cutout {
+        bottom: 8.3vh;
+
+        height:
+          min(64vh, 610px);
+      }
+
+      .hero-next-transition {
+        height: 11.8vh;
+        min-height: 82px;
+      }
+
+    }
+
+
   </style>
 
 </head>
