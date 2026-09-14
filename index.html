@@ -8851,6 +8851,349 @@
     }
 
 
+  
+
+    /* =========================================================
+       PAGE 01 / ARC-CONTOUR → LOWER-RIGHT FADE
+       Final transition refinement only.
+
+       The main fade now follows concentric elliptical contours:
+       the visible outer arc is the lightest boundary, and opacity
+       increases naturally as it moves inward toward the lower-right.
+
+       A very low bottom reinforcement layer guarantees that the
+       portrait PNG edge is completely buried before Page 02 begins.
+       ========================================================= */
+
+    .hero-next-transition {
+      position: absolute;
+      z-index: 12;
+
+      right: -5.5vw;
+      bottom: 0;
+      width: 45vw;
+
+      height: 13.2vh;
+      min-height: 96px;
+
+      /*
+        Layer 1 (top): elliptical contour fade.
+        The ~78% ellipse passes close to the lower-left and upper-right
+        edges, so the fade visually originates from the curved outline.
+
+        Layer 2 (bottom): short, soft reinforcement.
+        This only exists to make the very bottom fully #151515 and hide
+        the lower raster edge of portrait.png. It disappears well before
+        the middle of the transition.
+      */
+      background:
+        radial-gradient(
+          ellipse 128% 128% at 0% 0%,
+          transparent 0%,
+          transparent 73%,
+          rgba(21,21,21,.04) 76%,
+          rgba(21,21,21,.11) 79%,
+          rgba(21,21,21,.22) 82%,
+          rgba(21,21,21,.38) 86%,
+          rgba(21,21,21,.57) 90%,
+          rgba(21,21,21,.76) 94%,
+          rgba(21,21,21,.91) 97%,
+          #151515 100%
+        ),
+        linear-gradient(
+          to top,
+          #151515 0%,
+          rgba(21,21,21,.98) 12%,
+          rgba(21,21,21,.86) 23%,
+          rgba(21,21,21,.62) 34%,
+          rgba(21,21,21,.36) 44%,
+          rgba(21,21,21,.17) 53%,
+          rgba(21,21,21,.06) 60%,
+          transparent 67%
+        ) !important;
+
+      /* The curve is now created by the gradient itself, not a hard radius. */
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+
+      clip-path: none !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+
+      overflow: visible;
+      box-shadow: none !important;
+      filter: none !important;
+
+      pointer-events: none;
+    }
+
+    .hero-next-transition::before,
+    .hero-next-transition::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    /* Preserve the Arizona-blue portrait field exactly. */
+    .hero::before {
+      right: -5.5vw;
+      width: 45vw;
+
+      background:
+        linear-gradient(
+          155deg,
+          #07172f 0%,
+          #0c234b 64%,
+          #122e58 100%
+        );
+    }
+
+    .hero-cutout {
+      z-index: 3;
+    }
+
+    .hero-bottom-v2 {
+      z-index: 14;
+      border-top: 0 !important;
+    }
+
+    .hero-bottom-v2 .scroll-hint {
+      position: relative;
+      z-index: 15;
+
+      color: rgba(255,255,255,.96);
+
+      text-shadow:
+        0 1px 9px rgba(0,0,0,.28);
+    }
+
+    @media (max-width: 1180px) and (min-width: 901px) {
+
+      .hero-next-transition {
+        height: 12.6vh;
+        min-height: 90px;
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .hero-next-transition {
+        right: -30vw;
+        width: 87vw;
+
+        height: 11.8vh;
+        min-height: 84px;
+
+        background:
+          radial-gradient(
+            ellipse 132% 132% at 0% 0%,
+            transparent 0%,
+            transparent 73%,
+            rgba(21,21,21,.04) 76%,
+            rgba(21,21,21,.11) 79%,
+            rgba(21,21,21,.22) 82%,
+            rgba(21,21,21,.38) 86%,
+            rgba(21,21,21,.57) 90%,
+            rgba(21,21,21,.76) 94%,
+            rgba(21,21,21,.91) 97%,
+            #151515 100%
+          ),
+          linear-gradient(
+            to top,
+            #151515 0%,
+            rgba(21,21,21,.98) 12%,
+            rgba(21,21,21,.86) 23%,
+            rgba(21,21,21,.62) 34%,
+            rgba(21,21,21,.36) 44%,
+            rgba(21,21,21,.17) 53%,
+            rgba(21,21,21,.06) 60%,
+            transparent 67%
+          ) !important;
+      }
+    }
+
+    @media (max-width: 620px) {
+
+      .hero-next-transition {
+        height: 10.8vh;
+        min-height: 76px;
+      }
+    }
+
+
+  
+
+    /* =========================================================
+       PAGE 01 / SOLID CORE + SOFT CURVED EDGE
+       Requested behavior:
+       - keep the curved sweep shape
+       - only the OUTER EDGE is semi-transparent / feathered
+       - the main body remains deep #151515 so it fully hides
+         the lower edge of portrait.png
+       - bottom lands directly on Page 02 color
+       ========================================================= */
+
+    .hero-next-transition {
+      position: absolute;
+      z-index: 12;
+
+      right: -5.5vw;
+      bottom: 0;
+      width: 45vw;
+
+      height: 13.8vh;
+      min-height: 100px;
+
+      /* Main body is intentionally opaque */
+      background: #151515 !important;
+
+      /* Restore the broad shallow curved silhouette */
+      clip-path: none !important;
+      border: 0 !important;
+      border-top-left-radius: 100% 100% !important;
+
+      overflow: visible;
+
+      /* Remove all previous masks/filters so the core stays solid */
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+      filter: none !important;
+      box-shadow: none !important;
+
+      pointer-events: none;
+    }
+
+    /* Soft feather ONLY around the outer curved edge.
+       This blurred duplicate sits behind the solid core, so the
+       transition feels soft without making the main body transparent. */
+    .hero-next-transition::before {
+      content: "" !important;
+      display: block !important;
+
+      position: absolute;
+      z-index: -1;
+
+      left: -12px;
+      top: -13px;
+      right: 0;
+      bottom: 0;
+
+      background:
+        rgba(21,21,21,.58);
+
+      border-top-left-radius:
+        100% 100%;
+
+      filter:
+        blur(13px);
+
+      opacity: .92;
+
+      pointer-events: none;
+    }
+
+    /* A second, subtler halo makes the feather smoother rather than
+       looking like one blurred stroke. */
+    .hero-next-transition::after {
+      content: "" !important;
+      display: block !important;
+
+      position: absolute;
+      z-index: -2;
+
+      left: -20px;
+      top: -20px;
+      right: 0;
+      bottom: 0;
+
+      background:
+        rgba(21,21,21,.24);
+
+      border-top-left-radius:
+        100% 100%;
+
+      filter:
+        blur(20px);
+
+      opacity: .82;
+
+      pointer-events: none;
+    }
+
+    /* Keep the Arizona-blue field exactly as before. */
+    .hero::before {
+      right: -5.5vw;
+      width: 45vw;
+
+      background:
+        linear-gradient(
+          155deg,
+          #07172f 0%,
+          #0c234b 64%,
+          #122e58 100%
+        );
+    }
+
+    /* Portrait remains below the transition, so the solid core
+       fully buries the lower PNG edge. */
+    .hero-cutout {
+      z-index: 3;
+    }
+
+    .hero-bottom-v2 {
+      z-index: 14;
+      border-top: 0 !important;
+    }
+
+    .hero-bottom-v2 .scroll-hint {
+      position: relative;
+      z-index: 15;
+
+      color: rgba(255,255,255,.96);
+
+      text-shadow:
+        0 1px 9px rgba(0,0,0,.28);
+    }
+
+    @media (max-width: 1180px) and (min-width: 901px) {
+
+      .hero-next-transition {
+        height: 13.2vh;
+        min-height: 94px;
+      }
+
+      .hero-next-transition::before {
+        left: -10px;
+        top: -12px;
+        filter: blur(12px);
+      }
+
+      .hero-next-transition::after {
+        left: -18px;
+        top: -18px;
+        filter: blur(18px);
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .hero-next-transition {
+        right: -30vw;
+        width: 87vw;
+
+        height: 12.2vh;
+        min-height: 86px;
+      }
+    }
+
+    @media (max-width: 620px) {
+
+      .hero-next-transition {
+        height: 11.2vh;
+        min-height: 78px;
+      }
+    }
+
+
   </style>
 
 </head>
