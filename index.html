@@ -7104,6 +7104,106 @@
     }
 
 
+  
+
+    /* =========================================================
+       PAGE 01 / UA IDENTITY REFINEMENT
+       Requested refinements only:
+       - "Profile · 2026"
+       - larger University of Arizona identity block
+       - traditional Chinese name beside FoonKei Ng
+       ========================================================= */
+
+    .hero-meta-v2.hero-ua-identity {
+      margin-top: 13px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3px;
+
+      max-width: 560px;
+
+      font-family:
+        "Inter",
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      text-transform: none;
+      letter-spacing: 0;
+      line-height: 1.18;
+    }
+
+    .hero-meta-v2.hero-ua-identity .hero-ua-school {
+      display: block;
+
+      font-size:
+        clamp(15px, 1.16vw, 19px);
+
+      font-weight: 750;
+      letter-spacing: -.026em;
+
+      color: #0c234b;
+    }
+
+    .hero-meta-v2.hero-ua-identity .hero-ua-department {
+      display: block;
+
+      margin-top: 2px;
+
+      font-size:
+        clamp(11.5px, .82vw, 14px);
+
+      font-weight: 600;
+      letter-spacing: -.012em;
+
+      color: #4f5660;
+    }
+
+    .hero-meta-v2.hero-ua-identity .hero-ua-field {
+      display: block;
+
+      margin-top: 1px;
+
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      font-size:
+        clamp(9px, .68vw, 11px);
+
+      font-weight: 500;
+      letter-spacing: .045em;
+
+      text-transform: uppercase;
+
+      color: #6b6d70;
+    }
+
+    @media (max-width: 900px) {
+
+      .hero-meta-v2.hero-ua-identity {
+        max-width: 68vw;
+        gap: 2px;
+      }
+
+      .hero-meta-v2.hero-ua-identity .hero-ua-school {
+        font-size:
+          clamp(14px, 3.8vw, 18px);
+      }
+
+      .hero-meta-v2.hero-ua-identity .hero-ua-department {
+        font-size:
+          clamp(10.5px, 2.8vw, 13px);
+      }
+
+      .hero-meta-v2.hero-ua-identity .hero-ua-field {
+        font-size:
+          clamp(8px, 2.2vw, 10px);
+      }
+    }
+
+
   </style>
 
 </head>
@@ -7221,7 +7321,7 @@
         <div class="hero-editorial">
 
           <div class="hero-profile-kicker reveal">
-            Research profile · 2026
+            Profile · 2026
           </div>
 
 
@@ -7259,23 +7359,23 @@
               </strong>
 
               <span>
-                吴欢祺 · FoonKei Ng
+                吴欢祺 · FoonKei Ng · 吳歡祺
               </span>
 
             </div>
 
 
-            <div class="hero-meta-v2">
+            <div class="hero-meta-v2 hero-ua-identity">
 
-              <span class="hero-meta-accent">
+              <span class="hero-meta-accent hero-ua-school">
                 The University of Arizona
               </span>
 
-              <span>
+              <span class="hero-ua-department">
                 Department of Mathematics
               </span>
 
-              <span>
+              <span class="hero-ua-field">
                 Data Science · Statistics
               </span>
 
