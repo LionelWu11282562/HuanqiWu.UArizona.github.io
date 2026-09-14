@@ -19,6 +19,11 @@
     rel="stylesheet"
   >
 
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
+    rel="stylesheet"
+  >
+
   <meta name="description" content="Huanqi Wu (huanqiwu; 吴欢祺 / 吳歡祺; FoonKei Ng) studies Data Science and Statistics at The University of Arizona, with research spanning biomedical data science, computational genomics, epidemiology, real-world evidence, public health and machine learning.">
 
 
@@ -114,7 +119,7 @@
         "FoonkeiNg"
       ],
       "url": "https://huanqiwu.com/",
-      "image": "https://huanqiwu.com/assets/images/portrait.jpeg",
+      "image": "https://huanqiwu.com/assets/images/portrait.png",
       "description": "Huanqi Wu (huanqiwu; 吴欢祺 / 吳歡祺; FoonKei Ng) studies Data Science and Statistics at The University of Arizona, with research spanning biomedical data science, computational genomics, epidemiology, real-world evidence, public health and machine learning.",
       "affiliation": {
         "@type": "CollegeOrUniversity",
@@ -6546,6 +6551,559 @@
     }
 
 
+
+    /* =========================================================
+       PAGE 01 / CUTOUT EDITORIAL HERO
+       Arizona-inspired, no portrait frame.
+       Uses assets/images/portrait.png (transparent PNG cutout).
+       ========================================================= */
+
+    body.on-hero .topbar {
+      mix-blend-mode: normal;
+      color: #0c234b;
+    }
+
+    body.on-hero .brand {
+      color: #0c234b;
+    }
+
+    body.on-hero .brand::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 10px;
+      background: #ab0520;
+      vertical-align: 1px;
+    }
+
+    body.on-hero .nav-links button {
+      color: #0c234b;
+      opacity: .72;
+    }
+
+    body.on-hero .nav-links button:hover {
+      color: #ab0520;
+      opacity: 1;
+    }
+
+    body.on-hero .page-counter {
+      color: rgba(12,35,75,.44);
+      mix-blend-mode: normal;
+    }
+
+    .hero {
+      isolation: isolate;
+      background:
+        radial-gradient(
+          circle at 17% 83%,
+          rgba(171,5,32,.032),
+          transparent 27%
+        ),
+        linear-gradient(
+          112deg,
+          #f7f4ed 0%,
+          #f2efe8 62%,
+          #ece9e1 100%
+        );
+      color: #0c234b;
+    }
+
+    /* Arizona-blue field behind the cutout portrait.
+       It is intentionally a field, not a card or a frame. */
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      right: -5.5vw;
+      top: 8.6vh;
+      width: 45vw;
+      height: 92vh;
+      background:
+        linear-gradient(
+          155deg,
+          #07172f 0%,
+          #0c234b 64%,
+          #122e58 100%
+        );
+      clip-path:
+        polygon(
+          19% 0,
+          100% 0,
+          100% 100%,
+          0 100%,
+          0 22%
+        );
+      box-shadow:
+        -28px 26px 80px rgba(12,35,75,.075);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      right: 39.1vw;
+      top: 17vh;
+      width: 4px;
+      height: 20vh;
+      background:
+        linear-gradient(
+          to bottom,
+          #ab0520 0 72%,
+          rgba(171,5,32,.08) 72% 100%
+        );
+      pointer-events: none;
+    }
+
+    .hero .slide-inner {
+      position: relative;
+      z-index: 3;
+      justify-content: flex-start;
+    }
+
+    .hero-masthead {
+      position: relative;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      padding-top: 4px;
+    }
+
+    .hero-masthead .eyebrow {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .115em;
+      color: #6f6d67;
+    }
+
+    .hero-masthead-note {
+      margin-right: 1.5vw;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 8px;
+      line-height: 1.4;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.64);
+    }
+
+    .hero-editorial {
+      position: relative;
+      z-index: 5;
+      width: min(58vw, 980px);
+      margin-top: clamp(72px, 10.5vh, 132px);
+    }
+
+    .hero-profile-kicker {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 18px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #817e76;
+    }
+
+    .hero-profile-kicker::before {
+      content: "";
+      width: 36px;
+      height: 2px;
+      background: #ab0520;
+    }
+
+    .hero-title-v2 {
+      max-width: 920px;
+      font-family: "Newsreader", "Times New Roman", serif;
+      font-size: clamp(64px, 7.2vw, 126px);
+      font-weight: 500;
+      line-height: .82;
+      letter-spacing: -.065em;
+      color: #0c234b;
+    }
+
+    .hero-title-v2 .hero-title-line {
+      display: block;
+    }
+
+    .hero-title-v2 .hero-title-accent {
+      color: #ab0520;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .hero-description-v2 {
+      max-width: 570px;
+      margin-top: 31px;
+      padding-left: 19px;
+      border-left: 2px solid rgba(171,5,32,.76);
+      font-size: clamp(15px, 1.2vw, 19px);
+      font-weight: 450;
+      line-height: 1.55;
+      letter-spacing: -.018em;
+      color: #4f5660;
+    }
+
+    .hero-identity-v2 {
+      width: min(54vw, 820px);
+      margin-top: 34px;
+      padding-top: 17px;
+      border-top: 1px solid rgba(12,35,75,.18);
+    }
+
+    .hero-name-row-v2 {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 11px 20px;
+    }
+
+    .hero-name-row-v2 strong {
+      font-family: "Inter", sans-serif;
+      font-size: clamp(23px, 1.8vw, 31px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -.045em;
+      color: #0c234b;
+    }
+
+    .hero-name-row-v2 span {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(18px, 1.35vw, 23px);
+      font-style: italic;
+      color: #7c7770;
+    }
+
+    .hero-meta-v2 {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9.5px;
+      line-height: 1.55;
+      letter-spacing: .045em;
+      text-transform: uppercase;
+      color: #6b6d70;
+    }
+
+    .hero-meta-v2 .hero-meta-accent {
+      color: #ab0520;
+      font-weight: 600;
+    }
+
+    .hero-actions-v2 {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 11px 24px;
+      margin-top: 18px;
+    }
+
+    .hero-action-v2 {
+      position: relative;
+      padding-bottom: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .085em;
+      text-transform: uppercase;
+      color: #0c234b;
+    }
+
+    .hero-action-v2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: #ab0520;
+      transform: scaleX(.22);
+      transform-origin: left;
+      transition: transform .26s ease;
+    }
+
+    .hero-action-v2:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hero-portrait-stage {
+      position: absolute;
+      z-index: 4;
+      right: -1.8vw;
+      bottom: -5.5vh;
+      width: 48vw;
+      height: 94vh;
+      pointer-events: none;
+    }
+
+    .hero-portrait-word {
+      position: absolute;
+      z-index: 1;
+      right: 1.7vw;
+      top: 8.5vh;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: "Inter", sans-serif;
+      font-size: clamp(68px, 8vw, 138px);
+      font-weight: 800;
+      line-height: .78;
+      letter-spacing: -.06em;
+      color: rgba(255,255,255,.055);
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    .hero-cutout {
+      position: absolute;
+      z-index: 3;
+      right: -3.5vw;
+      bottom: 0;
+      height: min(98vh, 980px);
+      width: auto;
+      max-width: none;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 34px 32px rgba(0,0,0,.16))
+        saturate(.98)
+        contrast(1.015);
+      transform-origin: bottom center;
+      transition:
+        transform .9s cubic-bezier(.16,1,.3,1),
+        filter .6s ease;
+    }
+
+    .slide.active .hero-cutout {
+      transform: translateY(0) scale(1);
+    }
+
+    .hero-visual-meta {
+      position: absolute;
+      z-index: 5;
+      right: 2.5vw;
+      top: 4.5vh;
+      max-width: 220px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 8px;
+      line-height: 1.55;
+      letter-spacing: .105em;
+      text-align: right;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.68);
+    }
+
+    .hero-visual-meta strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 9px;
+      color: rgba(255,255,255,.92);
+    }
+
+    .hero-bottom-v2 {
+      position: absolute;
+      z-index: 7;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      min-height: 44px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      padding-top: 13px;
+      border-top: 1px solid rgba(12,35,75,.16);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 8.5px;
+      line-height: 1.4;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: #73736f;
+    }
+
+    .hero-bottom-v2 .hero-bottom-left {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .hero-bottom-v2 .hero-bottom-left::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: #ab0520;
+    }
+
+    .hero-bottom-v2 .scroll-hint {
+      color: #0c234b;
+      font-weight: 600;
+    }
+
+    /* Short desktop screens */
+    @media (max-height: 820px) and (min-width: 901px) {
+      .hero-editorial {
+        margin-top: 6.3vh;
+      }
+
+      .hero-title-v2 {
+        font-size: clamp(58px, 6.65vw, 108px);
+      }
+
+      .hero-description-v2 {
+        margin-top: 21px;
+        font-size: clamp(14px, 1.05vw, 17px);
+      }
+
+      .hero-identity-v2 {
+        margin-top: 22px;
+        padding-top: 13px;
+      }
+
+      .hero-actions-v2 {
+        margin-top: 13px;
+      }
+
+      .hero-cutout {
+        height: min(96vh, 900px);
+      }
+    }
+
+    /* Mobile / tablet */
+    @media (max-width: 900px) {
+      .hero::before {
+        right: -30vw;
+        top: 12vh;
+        width: 87vw;
+        height: 88vh;
+        opacity: .94;
+        clip-path:
+          polygon(
+            28% 0,
+            100% 0,
+            100% 100%,
+            0 100%,
+            0 28%
+          );
+      }
+
+      .hero::after {
+        right: auto;
+        left: 25px;
+        top: 18vh;
+        width: 3px;
+        height: 12vh;
+      }
+
+      .hero-masthead-note {
+        display: none;
+      }
+
+      .hero-editorial {
+        width: 82vw;
+        margin-top: 8vh;
+      }
+
+      .hero-title-v2 {
+        max-width: 78vw;
+        font-size: clamp(46px, 12.2vw, 78px);
+        line-height: .86;
+      }
+
+      .hero-description-v2 {
+        max-width: 72vw;
+        margin-top: 21px;
+        font-size: 14px;
+      }
+
+      .hero-identity-v2 {
+        width: 72vw;
+        margin-top: 22px;
+      }
+
+      .hero-meta-v2 {
+        max-width: 62vw;
+        font-size: 8.5px;
+      }
+
+      .hero-actions-v2 {
+        gap: 10px 18px;
+      }
+
+      .hero-portrait-stage {
+        right: -20vw;
+        bottom: -2vh;
+        width: 73vw;
+        height: 70vh;
+        opacity: .94;
+      }
+
+      .hero-cutout {
+        right: -10vw;
+        height: 72vh;
+      }
+
+      .hero-portrait-word,
+      .hero-visual-meta {
+        display: none;
+      }
+
+      .hero-bottom-v2 {
+        font-size: 7.5px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero-editorial {
+        width: 92vw;
+        margin-top: 5.5vh;
+      }
+
+      .hero-title-v2 {
+        max-width: 92vw;
+        font-size: clamp(42px, 13.5vw, 67px);
+      }
+
+      .hero-description-v2 {
+        max-width: 78vw;
+        font-size: 13.5px;
+      }
+
+      .hero-identity-v2 {
+        width: 76vw;
+      }
+
+      .hero-name-row-v2 strong {
+        font-size: 21px;
+      }
+
+      .hero-name-row-v2 span {
+        font-size: 17px;
+      }
+
+      .hero-meta-v2 {
+        max-width: 72vw;
+      }
+
+      .hero-portrait-stage {
+        right: -28vw;
+        width: 82vw;
+        opacity: .88;
+      }
+
+      .hero-cutout {
+        height: 62vh;
+      }
+
+      .hero-bottom-v2 .hero-bottom-left {
+        display: none;
+      }
+    }
+
+
   </style>
 
 </head>
@@ -6619,227 +7177,156 @@
       data-slide="0"
     >
 
+      <div class="hero-portrait-stage reveal delay-2">
+
+        <div
+          class="hero-portrait-word"
+          aria-hidden="true"
+        >
+          ARIZONA
+        </div>
+
+        <img
+          src="assets/images/portrait.png"
+          alt="Portrait of Huanqi Wu"
+          class="hero-cutout"
+        >
+
+        <div class="hero-visual-meta">
+          <strong>
+            The University of Arizona
+          </strong>
+          Data Science · Statistics<br>
+          Tucson, Arizona
+        </div>
+
+      </div>
+
+
       <div class="slide-inner">
 
+        <div class="hero-masthead reveal">
 
-        <!-- TOP RESEARCH LABEL -->
+          <div class="eyebrow">
+            DATA SCIENCE · STATISTICS · COMPUTATIONAL BIOLOGY
+          </div>
 
-        <div class="eyebrow reveal">
-
-          DATA SCIENCE · STATISTICS · COMPUTATIONALBIOLOGY
+          <div class="hero-masthead-note">
+            Biomedical data · Population research · Genomics
+          </div>
 
         </div>
 
 
+        <div class="hero-editorial">
 
-        <!-- MAIN PAGE COMPOSITION -->
-
-        <div class="hero-grid">
-
-
-          <!-- LEFT / RESEARCH IDENTITY -->
-
-          <div class="hero-left">
-
-
-            <h1 class="hero-title reveal delay-1">
-
-
-              <span class="title-black">
-
-                CLINICAL<br>
-                MEDICINE<br>
-                PUBLIC HEALTH
-              </span>
-
-
-              <span class="title-red">
-
-                &amp; GENOMICS
-
-              </span>
-
-
-            </h1>
-
-
-
-            <p class="hero-description reveal delay-2">
-
-              I build statistical and computational
-              methods for biomedical, population,
-              and complex real-world data.
-
-            </p>
-
-
+          <div class="hero-profile-kicker reveal">
+            Research profile · 2026
           </div>
 
 
+          <h1 class="hero-title-v2 reveal delay-1">
 
-          <!-- RIGHT / PORTRAIT + IDENTITY -->
+            <span class="hero-title-line">
+              Clinical medicine,
+            </span>
 
-          <aside class="hero-panel reveal delay-3">
+            <span class="hero-title-line">
+              public health
+            </span>
+
+            <span class="hero-title-line hero-title-accent">
+              &amp; genomics.
+            </span>
+
+          </h1>
 
 
-            <!-- PORTRAIT -->
+          <p class="hero-description-v2 reveal delay-2">
 
-            <div class="portrait-frame">
+            I build statistical and computational methods for
+            biomedical, population, and complex real-world data.
+
+          </p>
 
 
-              <img
-                src="assets/images/portrait.jpeg"
-                alt="Portrait of Huanqi Wu"
-                class="portrait-image"
-              >
+          <div class="hero-identity-v2 reveal delay-3">
 
+            <div class="hero-name-row-v2">
+
+              <strong>
+                Huanqi Wu
+              </strong>
+
+              <span>
+                吴欢祺 · FoonKei Ng
+              </span>
+
+            </div>
+
+
+            <div class="hero-meta-v2">
+
+              <span class="hero-meta-accent">
+                The University of Arizona
+              </span>
+
+              <span>
+                Department of Mathematics
+              </span>
+
+              <span>
+                Data Science · Statistics
+              </span>
+
+            </div>
+
+
+            <div class="hero-actions-v2">
 
               <a
-                class="portrait-brand-mark"
-                href="https://huanqiwu.com/"
-                aria-label="Enlarge Huanqi Wu research mark"
-                data-logo-zoom
-                role="button"
+                class="hero-action-v2"
+                href="Huanqi_Wu_CV(1).pdf"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <img
-                  src="assets/images/huanqiwu.png"
-                  alt="Huanqi Wu research mark"
-                >
+                Curriculum Vitae ↗
               </a>
 
+              <a
+                class="hero-action-v2"
+                href="https://scholar.google.com/citations?user=tQUTvJQAAAAJ"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google Scholar ↗
+              </a>
 
-              <div class="portrait-caption">
-
-                <span>
-                  HUANQI
-                </span>
-
-                <span>
-                  LIONEL WU
-                </span>
-
-              </div>
-
-
-            </div>
-
-
-
-            <!-- PERSONAL IDENTITY -->
-
-            <div class="identity-block">
-
-
-              <div class="identity-name">
-
-
-                <span class="primary-name">
-                  Huanqi Wu
-                </span>
-
-
-                <span class="alias-name">
-                  FoonKei Ng
-                </span>
-
-
-              </div>
-
-              <div class="identity-search-names">
-                吴欢祺 · 吳歡祺 · huanqiwu
-              </div>
-
-
-              <div class="identity-meta">
-                
-                <div>
-                  The University of Arizona · Tucson
-                </div>
-                
-                <div>
-                  Department of Mathematics
-                </div>
-                
-                <div>
-                  Data Science
-                </div>
-                
-                <div>
-                  Tucson / Arizona
-                </div>
-                
-              </div>
-
-
-
-              <!-- EXTERNAL LINKS -->
-
-              <div class="hero-links">
-
-
-                <a
-                  href="Huanqi_Wu_CV(1).pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="hero-link"
-                >
-
-                  <span>
-                    Curriculum Vitae
-                  </span>
-
-                  <span>
-                    ↗
-                  </span>
-
-                </a>
-
-
-
-                <a
-                  href="https://scholar.google.com/citations?user=tQUTvJQAAAAJ"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="hero-link"
-                >
-
-                  <span>
-                    Google Scholar
-                  </span>
-
-                  <span>
-                    ↗
-                  </span>
-
-                </a>
-
-
-              </div>
-
+              <a
+                class="hero-action-v2"
+                href="https://github.com/LionelWu11282562?tab=repositories"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub ↗
+              </a>
 
             </div>
 
-
-          </aside>
-
+          </div>
 
         </div>
 
 
+        <div class="hero-bottom-v2 reveal delay-4">
 
-        <!-- BOTTOM IDENTITY -->
-
-        <div class="hero-bottom reveal delay-4">
-
-
-          <div>
-            HUANQI LIONEL WU
+          <div class="hero-bottom-left">
+            Huanqi Lionel Wu · Tucson, Arizona
           </div>
-
 
           <div class="scroll-hint">
 
-            Scroll to explore
+            Selected work
 
             <span class="scroll-arrow">
               ↓
@@ -6847,9 +7334,7 @@
 
           </div>
 
-
         </div>
-
 
       </div>
 
@@ -8904,6 +9389,11 @@
 
 
       currentSlide = index;
+
+      document.body.classList.toggle(
+        "on-hero",
+        currentSlide === 0
+      );
 
 
       deck.style.transform =
