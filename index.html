@@ -8298,6 +8298,255 @@
     }
 
 
+  
+
+    /* =========================================================
+       PAGE 01 / IDENTITY + NAVIGATION REFINEMENT
+       Requested changes only:
+       1) remove the line crossing "Data Science · Statistics"
+       2) move the three navigation rows left
+       3) enlarge type / navigation slightly
+       4) Arizona Red hover with white text
+       5) keep index and ↗ clearly separated
+       ========================================================= */
+
+    /* Remove the footer rule that visually crosses the identity block. */
+    .hero-bottom-v2 {
+      border-top: 0 !important;
+    }
+
+    /* Slightly tighter / more left-weighted two-column composition. */
+    .hero-identity-v2 {
+      width: min(53vw, 820px);
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(235px, 255px);
+
+      column-gap: 18px;
+    }
+
+    /* Make the identity area a little more legible. */
+    .hero-name-row-v2 strong {
+      font-size:
+        clamp(25px, 1.95vw, 34px);
+    }
+
+    .hero-name-row-v2 span {
+      font-size:
+        clamp(19px, 1.48vw, 25px);
+    }
+
+    .hero-meta-v2.hero-ua-identity .hero-ua-school {
+      font-size:
+        clamp(16px, 1.24vw, 20px);
+    }
+
+    .hero-meta-v2.hero-ua-identity .hero-ua-department {
+      font-size:
+        clamp(12px, .88vw, 14.5px);
+    }
+
+    .hero-meta-v2.hero-ua-identity .hero-ua-field {
+      font-size:
+        clamp(9.5px, .72vw, 11.5px);
+    }
+
+    /* Move the navigation cluster left and give it more breathing room. */
+    .hero-actions-v2 {
+      padding-left: 17px;
+      transform: translateX(-20px);
+
+      border-left:
+        1px solid rgba(12,35,75,.16);
+    }
+
+    .hero-action-v2 {
+      min-height: 48px;
+
+      /* 42px on the left leaves an independent index column;
+         34px on the right leaves a dedicated arrow column. */
+      padding:
+        0 34px
+        0 42px;
+
+      font-size: 10.5px;
+      font-weight: 650;
+
+      letter-spacing: .07em;
+
+      border-bottom:
+        1px solid rgba(12,35,75,.14);
+
+      background: transparent;
+
+      transition:
+        color .20s ease,
+        background .20s ease,
+        border-color .20s ease,
+        padding-left .20s ease;
+    }
+
+    .hero-action-v2:first-child {
+      border-top:
+        1px solid rgba(12,35,75,.14);
+    }
+
+    /* Reset inherited pseudo-element geometry completely so the arrow
+       can never stretch across the row as a colored bar. */
+    .hero-action-v2::before {
+      left: 11px;
+      top: 50%;
+      bottom: auto;
+      right: auto;
+
+      width: 20px;
+      height: auto;
+
+      transform:
+        translateY(-50%);
+
+      font-size: 8.5px;
+      line-height: 1;
+
+      color: #8e8a83;
+    }
+
+    .hero-action-v2::after {
+      content: "↗";
+
+      left: auto !important;
+      right: 9px !important;
+      top: 50% !important;
+      bottom: auto !important;
+
+      width: 18px !important;
+      height: 18px !important;
+
+      display: grid !important;
+      place-items: center;
+
+      transform:
+        translateY(-50%) !important;
+
+      background:
+        transparent !important;
+
+      color: #0c234b;
+
+      font-family:
+        "Inter",
+        sans-serif;
+
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1;
+
+      transition:
+        color .20s ease,
+        transform .20s ease;
+    }
+
+    /* Strong, intentional UA-red hover:
+       the entire row turns red and every piece of information remains visible. */
+    .hero-action-v2:hover,
+    .hero-action-v2:focus-visible {
+      padding-left: 46px;
+
+      color: #ffffff !important;
+
+      background:
+        #ab0520 !important;
+
+      border-color:
+        #ab0520 !important;
+
+      outline: none;
+
+      box-shadow: none;
+    }
+
+    .hero-action-v2:hover::before,
+    .hero-action-v2:focus-visible::before {
+      color:
+        rgba(255,255,255,.72) !important;
+    }
+
+    .hero-action-v2:hover::after,
+    .hero-action-v2:focus-visible::after {
+      color: #ffffff !important;
+
+      background:
+        transparent !important;
+
+      transform:
+        translate(2px, calc(-50% - 2px)) !important;
+    }
+
+    /* Keep the bottom micro-signature independent from the identity unit. */
+    .hero-bottom-v2 .hero-bottom-left {
+      color: #73736f;
+    }
+
+    @media (max-height: 820px) and (min-width: 901px) {
+
+      .hero-identity-v2 {
+        width: min(53vw, 800px);
+
+        grid-template-columns:
+          minmax(0, 1fr)
+          minmax(220px, 245px);
+      }
+
+      .hero-actions-v2 {
+        transform:
+          translateX(-16px);
+
+        padding-left: 14px;
+      }
+
+      .hero-action-v2 {
+        min-height: 43px;
+        font-size: 9.8px;
+      }
+
+      .hero-action-v2::after {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .hero-identity-v2 {
+        width: 74vw;
+      }
+
+      .hero-actions-v2 {
+        transform: none;
+        padding-left: 0;
+      }
+
+      .hero-action-v2 {
+        min-height: 40px;
+
+        padding:
+          9px 28px
+          9px 30px;
+
+        font-size: 8.8px;
+      }
+
+      .hero-action-v2::before {
+        left: 6px;
+      }
+
+      .hero-action-v2::after {
+        right: 5px !important;
+        font-size: 13px;
+      }
+    }
+
+
   </style>
 
 </head>
