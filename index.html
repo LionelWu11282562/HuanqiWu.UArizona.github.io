@@ -7458,6 +7458,68 @@
     }
 
 
+  
+    /* =========================================================
+       HOME VARIANT C — INTEGRATED RIGHT-FIELD MORPH
+       Blue field itself transitions toward Page 02 black.
+       Most seamless / least "added shape" version.
+       ========================================================= */
+
+    .hero::before {
+      background:
+        linear-gradient(
+          180deg,
+          #07172f 0%,
+          #0c234b 50%,
+          #0b2248 66%,
+          #111827 80%,
+          #151515 100%
+        );
+    }
+
+    .hero-next-transition {
+      z-index: 7;
+      right: 0;
+      bottom: 0;
+
+      width: 49vw;
+      height: 24vh;
+      min-height: 165px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(21,21,21,0) 0%,
+          rgba(21,21,21,.04) 20%,
+          rgba(21,21,21,.16) 42%,
+          rgba(21,21,21,.42) 66%,
+          rgba(21,21,21,.76) 84%,
+          rgba(21,21,21,.96) 100%
+        );
+
+      clip-path: none;
+      box-shadow: none;
+      pointer-events: none;
+    }
+
+    .hero-next-transition::before,
+    .hero-next-transition::after {
+      display: none;
+    }
+
+    /* A small blue-to-red-to-dark line echoes the site's UA palette,
+       but avoids creating another large geometric slab. */
+    .hero-next-transition {
+      border-top:
+        1px solid rgba(255,255,255,.025);
+    }
+
+    .hero-bottom-v2 .scroll-hint {
+      z-index: 10;
+      color: rgba(255,255,255,.93);
+      text-shadow: 0 1px 10px rgba(0,0,0,.24);
+    }
+
   </style>
 
 </head>
