@@ -6863,7 +6863,7 @@
       position: absolute;
       z-index: 3;
       right: -0.4vw;
-      bottom: 0;
+      bottom: 10.5vh;
       height: min(78vh, 760px);
       width: auto;
       max-width: none;
@@ -6968,6 +6968,7 @@
       }
 
       .hero-cutout {
+        bottom: 9.5vh;
         height: min(76vh, 730px);
       }
     }
@@ -7230,6 +7231,114 @@
     }
 
 
+  
+
+    /* =========================================================
+       PAGE 01 / PORTRAIT POSITION + DARK TRANSITION WEDGE
+       Raises the portrait toward the vertical center and creates
+       a visual bridge into the black Selected Work slide.
+       ========================================================= */
+
+    .hero-next-transition {
+      position: absolute;
+      z-index: 2;
+
+      right: 0;
+      bottom: 0;
+
+      width: 47.5vw;
+      height: 10.5vh;
+
+      min-height: 72px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #181818 0%,
+          #151515 54%,
+          #111111 100%
+        );
+
+      clip-path:
+        polygon(
+          13% 0,
+          100% 0,
+          100% 100%,
+          0 100%
+        );
+
+      pointer-events: none;
+
+      box-shadow:
+        0 -16px 44px rgba(7,23,47,.08);
+    }
+
+    /* A very subtle dark-blue seam ties the wedge to the Arizona field
+       rather than making it look like a separate pasted-on shape. */
+    .hero-next-transition::before {
+      content: "";
+
+      position: absolute;
+      left: 10%;
+      top: 0;
+
+      width: 36%;
+      height: 2px;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(12,35,75,0),
+          rgba(12,35,75,.68),
+          rgba(171,5,32,.72),
+          rgba(171,5,32,0)
+        );
+    }
+
+    .hero-bottom-v2 .scroll-hint {
+      position: relative;
+      z-index: 8;
+
+      color: rgba(255,255,255,.88);
+
+      text-shadow:
+        0 1px 8px rgba(0,0,0,.28);
+    }
+
+    @media (max-width: 900px) {
+
+      .hero-next-transition {
+        width: 74vw;
+        height: 9vh;
+        min-height: 62px;
+
+        clip-path:
+          polygon(
+            22% 0,
+            100% 0,
+            100% 100%,
+            0 100%
+          );
+      }
+
+      .hero-cutout {
+        bottom: 7.5vh;
+      }
+    }
+
+    @media (max-width: 620px) {
+
+      .hero-next-transition {
+        width: 84vw;
+        height: 8vh;
+      }
+
+      .hero-cutout {
+        bottom: 6.5vh;
+      }
+    }
+
+
   </style>
 
 </head>
@@ -7327,6 +7436,11 @@
         </div>
 
       </div>
+
+      <div
+        class="hero-next-transition"
+        aria-hidden="true"
+      ></div>
 
 
       <div class="slide-inner">
