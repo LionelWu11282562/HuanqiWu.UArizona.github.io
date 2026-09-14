@@ -7339,6 +7339,125 @@
     }
 
 
+  
+
+    /* =========================================================
+       PAGE 01 / REFINED TRANSITION VEIL
+       Replaces the solid "base" feeling with a shallow overlay
+       that fades over the lower portrait and into Page 02.
+       ========================================================= */
+
+    .hero-next-transition {
+      z-index: 6;
+
+      right: 0;
+      bottom: 0;
+
+      width: 44vw;
+      height: 12.5vh;
+      min-height: 82px;
+
+      /* The top is almost transparent; the bottom resolves to
+         the exact dark family used on the Selected Work page. */
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(21,21,21,0) 0%,
+          rgba(21,21,21,.12) 22%,
+          rgba(21,21,21,.58) 58%,
+          rgba(21,21,21,.94) 86%,
+          #151515 100%
+        );
+
+      /* A much shallower diagonal entry; importantly, the overlay
+         now cuts ACROSS the lower portrait instead of sitting beneath it. */
+      clip-path:
+        polygon(
+          16% 100%,
+          27% 0,
+          100% 0,
+          100% 100%
+        );
+
+      box-shadow: none;
+
+      pointer-events: none;
+    }
+
+    /* Remove the old decorative seam that made the previous block
+       read as a separate geometric slab. */
+    .hero-next-transition::before {
+      display: none;
+    }
+
+    /* Small editorial edge: a faint diagonal red line where the veil enters. */
+    .hero-next-transition::after {
+      content: "";
+
+      position: absolute;
+      left: 21.4%;
+      top: -4px;
+
+      width: 2px;
+      height: 118%;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(171,5,32,0),
+          rgba(171,5,32,.72) 34%,
+          rgba(171,5,32,.28) 78%,
+          rgba(171,5,32,0)
+        );
+
+      transform:
+        rotate(10deg);
+
+      transform-origin:
+        top center;
+
+      opacity: .72;
+    }
+
+    /* Keep the call-to-action readable, but avoid making it look like
+       a button sitting on a black footer bar. */
+    .hero-bottom-v2 .scroll-hint {
+      z-index: 9;
+      color: rgba(255,255,255,.90);
+      text-shadow:
+        0 1px 8px rgba(0,0,0,.22);
+    }
+
+    @media (max-width: 900px) {
+
+      .hero-next-transition {
+        width: 69vw;
+        height: 10.5vh;
+        min-height: 68px;
+
+        clip-path:
+          polygon(
+            23% 100%,
+            35% 0,
+            100% 0,
+            100% 100%
+          );
+      }
+
+      .hero-next-transition::after {
+        left: 29%;
+      }
+    }
+
+    @media (max-width: 620px) {
+
+      .hero-next-transition {
+        width: 78vw;
+        height: 9.5vh;
+      }
+    }
+
+
   </style>
 
 </head>
