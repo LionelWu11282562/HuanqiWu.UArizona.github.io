@@ -8547,6 +8547,174 @@
     }
 
 
+  
+
+    /* =========================================================
+       PAGE 01 / FINAL ARC-ALIGNED FADE
+       Refines only the lower-right transition:
+       - same footprint as Arizona-blue field
+       - slightly lower profile
+       - black density follows the curve (radial mask), not horizontal bands
+       - portrait remains untouched until the lower portion
+       - bottom edge resolves completely to Page 02 #151515
+       ========================================================= */
+
+    .hero-next-transition {
+      position: absolute;
+      z-index: 12;
+
+      /* exactly align with the Arizona-blue field */
+      right: -5.5vw;
+      bottom: 0;
+      width: 45vw;
+
+      /* about 15% lower than the previous 15.5vh version */
+      height: 13.2vh;
+      min-height: 96px;
+
+      /* solid Page-02 color; transparency is now controlled by the mask */
+      background: #151515 !important;
+
+      /* remove the old geometric / banded treatments */
+      clip-path: none !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      filter: none !important;
+      overflow: visible;
+
+      /*
+        The ellipse center sits BELOW the bottom-right corner.
+        This makes the fade follow a shallow sweeping arc:
+        - bottom edge is fully opaque
+        - right side becomes dark earlier
+        - upper-left edge dissolves gradually
+        - no horizontal grey bands across the jacket
+      */
+      -webkit-mask-image:
+        radial-gradient(
+          ellipse 145% 165% at 100% 132%,
+          #000 0%,
+          #000 72%,
+          rgba(0,0,0,.90) 80%,
+          rgba(0,0,0,.55) 88%,
+          rgba(0,0,0,.18) 96%,
+          transparent 100%
+        );
+
+      mask-image:
+        radial-gradient(
+          ellipse 145% 165% at 100% 132%,
+          #000 0%,
+          #000 72%,
+          rgba(0,0,0,.90) 80%,
+          rgba(0,0,0,.55) 88%,
+          rgba(0,0,0,.18) 96%,
+          transparent 100%
+        );
+
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+
+      pointer-events: none;
+    }
+
+    /* No secondary seams or decorative strokes on the transition. */
+    .hero-next-transition::before,
+    .hero-next-transition::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    /* Keep the right field itself unchanged and clean. */
+    .hero::before {
+      right: -5.5vw;
+      width: 45vw;
+
+      background:
+        linear-gradient(
+          155deg,
+          #07172f 0%,
+          #0c234b 64%,
+          #122e58 100%
+        );
+    }
+
+    /* Portrait stays beneath the transition so its PNG lower edge disappears. */
+    .hero-cutout {
+      z-index: 3;
+    }
+
+    /* Keep homepage navigation above all decorative transition layers. */
+    .hero-actions-v2 {
+      z-index: 30;
+    }
+
+    .hero-action-v2 {
+      z-index: 31;
+    }
+
+    /* The footer remains readable; no new line is introduced. */
+    .hero-bottom-v2 {
+      z-index: 14;
+      border-top: 0 !important;
+    }
+
+    .hero-bottom-v2 .scroll-hint {
+      position: relative;
+      z-index: 15;
+      color: rgba(255,255,255,.96);
+      text-shadow: 0 1px 9px rgba(0,0,0,.28);
+    }
+
+    @media (max-width: 1180px) and (min-width: 901px) {
+      .hero-next-transition {
+        right: -5.5vw;
+        width: 45vw;
+        height: 12.6vh;
+        min-height: 90px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-next-transition {
+        right: -30vw;
+        width: 87vw;
+        height: 11.8vh;
+        min-height: 84px;
+
+        -webkit-mask-image:
+          radial-gradient(
+            ellipse 150% 175% at 100% 134%,
+            #000 0%,
+            #000 72%,
+            rgba(0,0,0,.90) 80%,
+            rgba(0,0,0,.55) 88%,
+            rgba(0,0,0,.18) 96%,
+            transparent 100%
+          );
+
+        mask-image:
+          radial-gradient(
+            ellipse 150% 175% at 100% 134%,
+            #000 0%,
+            #000 72%,
+            rgba(0,0,0,.90) 80%,
+            rgba(0,0,0,.55) 88%,
+            rgba(0,0,0,.18) 96%,
+            transparent 100%
+          );
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero-next-transition {
+        height: 10.8vh;
+        min-height: 76px;
+      }
+    }
+
+
   </style>
 
 </head>
