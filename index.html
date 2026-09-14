@@ -7520,6 +7520,128 @@
       text-shadow: 0 1px 10px rgba(0,0,0,.24);
     }
 
+  
+
+    /* =========================================================
+       PAGE 01 / RIGHT-TRIANGLE PAGE TRANSITION
+       Requested geometry:
+       - true right triangle
+       - 90° corner at bottom-right
+       - overlays the portrait
+       - fades upward
+       - becomes fully opaque at the bottom
+       - bottom edge exactly matches Page 02 (#151515)
+       ========================================================= */
+
+    .hero-next-transition {
+      position: absolute;
+      z-index: 12;
+
+      right: 0;
+      bottom: 0;
+
+      width: 45vw;
+      height: 29vh;
+      min-height: 205px;
+
+      /* Top remains light enough to preserve the portrait;
+         the lower half becomes aggressively opaque so the
+         cutout's bottom edge disappears completely. */
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(21,21,21,0) 0%,
+          rgba(21,21,21,.10) 14%,
+          rgba(21,21,21,.38) 26%,
+          rgba(21,21,21,.74) 39%,
+          rgba(21,21,21,.94) 52%,
+          #151515 63%,
+          #151515 100%
+        );
+
+      /* True right triangle:
+         top-right / bottom-right / bottom-left.
+         The 90-degree corner is the lower-right corner. */
+      clip-path:
+        polygon(
+          100% 0,
+          100% 100%,
+          0 100%
+        );
+
+      box-shadow: none;
+      pointer-events: none;
+    }
+
+    /* Remove every decorative seam from earlier variants.
+       The triangle should read as one continuous transition surface. */
+    .hero-next-transition::before,
+    .hero-next-transition::after {
+      display: none !important;
+    }
+
+    /* Restore the blue field to a cleaner UA-blue field.
+       The triangle, not the background itself, now performs the handoff. */
+    .hero::before {
+      background:
+        linear-gradient(
+          155deg,
+          #07172f 0%,
+          #0c234b 64%,
+          #122e58 100%
+        );
+    }
+
+    /* The lower portrait is deliberately covered by the triangle.
+       Keep the portrait above its previous position, but below the transition. */
+    .hero-cutout {
+      z-index: 3;
+    }
+
+    /* Put the page handoff label on top of the opaque bottom edge. */
+    .hero-bottom-v2 .scroll-hint {
+      position: relative;
+      z-index: 15;
+
+      color: rgba(255,255,255,.96);
+      text-shadow:
+        0 1px 10px rgba(0,0,0,.34);
+    }
+
+    /* Slightly darken only the right side of the bottom progress region
+       so the triangle visually lands on the exact next-page tone. */
+    .hero .hero-bottom-v2 {
+      z-index: 14;
+    }
+
+    @media (max-width: 1180px) and (min-width: 901px) {
+
+      .hero-next-transition {
+        width: 46vw;
+        height: 27vh;
+        min-height: 190px;
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .hero-next-transition {
+        width: 73vw;
+        height: 24vh;
+        min-height: 160px;
+      }
+    }
+
+    @media (max-width: 620px) {
+
+      .hero-next-transition {
+        width: 82vw;
+        height: 21vh;
+        min-height: 145px;
+      }
+    }
+
+
   </style>
 
 </head>
