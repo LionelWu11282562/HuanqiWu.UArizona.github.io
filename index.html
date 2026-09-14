@@ -6862,9 +6862,9 @@
     .hero-cutout {
       position: absolute;
       z-index: 3;
-      right: -2.0vw;
+      right: -0.4vw;
       bottom: 0;
-      height: min(88vh, 860px);
+      height: min(78vh, 760px);
       width: auto;
       max-width: none;
       object-fit: contain;
@@ -6968,7 +6968,7 @@
       }
 
       .hero-cutout {
-        height: min(86vh, 820px);
+        height: min(76vh, 730px);
       }
     }
 
@@ -7204,6 +7204,32 @@
     }
 
 
+  
+
+    /* =========================================================
+       PAGE 01 / PORTRAIT SCALE + CLICKABLE HERO ACTIONS
+       ========================================================= */
+
+    .hero-actions-v2 {
+      position: relative;
+      z-index: 30;
+      pointer-events: auto;
+    }
+
+    .hero-action-v2 {
+      position: relative;
+      z-index: 31;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    .hero-action-v2:hover,
+    .hero-action-v2:focus-visible {
+      color: #ab0520;
+      outline: none;
+    }
+
+
   </style>
 
 </head>
@@ -7389,6 +7415,7 @@
                 href="Huanqi_Wu_CV(1).pdf"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Open Huanqi Wu curriculum vitae"
               >
                 Curriculum Vitae ↗
               </a>
@@ -7398,6 +7425,7 @@
                 href="https://scholar.google.com/citations?user=tQUTvJQAAAAJ"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Open Huanqi Wu Google Scholar profile"
               >
                 Google Scholar ↗
               </a>
@@ -7407,6 +7435,7 @@
                 href="https://github.com/LionelWu11282562?tab=repositories"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Open Huanqi Wu GitHub repositories"
               >
                 GitHub ↗
               </a>
