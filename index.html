@@ -8715,6 +8715,142 @@
     }
 
 
+  
+
+    /* =========================================================
+       PAGE 01 / SOFT UNIFORM ARC FADE
+       Refines ONLY the lower-right transition:
+       - same width / position as the Arizona-blue field
+       - keeps the shallow curved profile
+       - soft opacity progression is now UNIFORM across the width
+       - no solid-looking right side
+       - bottom still resolves fully to Page 02 #151515
+       ========================================================= */
+
+    .hero-next-transition {
+      position: absolute;
+      z-index: 12;
+
+      right: -5.5vw;
+      bottom: 0;
+      width: 45vw;
+
+      height: 13.2vh;
+      min-height: 96px;
+
+      /* The color itself is solid; the mask controls opacity evenly
+         from top to bottom across the ENTIRE arc. */
+      background: #151515 !important;
+
+      clip-path: none !important;
+      border: 0 !important;
+
+      /* Keep the same broad, shallow arc */
+      border-top-left-radius: 100% 100% !important;
+
+      overflow: hidden;
+      box-shadow: none !important;
+      filter: none !important;
+
+      /*
+        Uniform vertical alpha progression.
+        Unlike the previous radial mask, the right side no longer
+        becomes opaque much earlier than the left side.
+      */
+      -webkit-mask-image:
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          rgba(0,0,0,.05) 10%,
+          rgba(0,0,0,.14) 22%,
+          rgba(0,0,0,.28) 36%,
+          rgba(0,0,0,.46) 51%,
+          rgba(0,0,0,.64) 66%,
+          rgba(0,0,0,.80) 79%,
+          rgba(0,0,0,.92) 90%,
+          #000 100%
+        );
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          rgba(0,0,0,.05) 10%,
+          rgba(0,0,0,.14) 22%,
+          rgba(0,0,0,.28) 36%,
+          rgba(0,0,0,.46) 51%,
+          rgba(0,0,0,.64) 66%,
+          rgba(0,0,0,.80) 79%,
+          rgba(0,0,0,.92) 90%,
+          #000 100%
+        );
+
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+
+      pointer-events: none;
+    }
+
+    .hero-next-transition::before,
+    .hero-next-transition::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    /* Preserve the blue field exactly as before */
+    .hero::before {
+      right: -5.5vw;
+      width: 45vw;
+
+      background:
+        linear-gradient(
+          155deg,
+          #07172f 0%,
+          #0c234b 64%,
+          #122e58 100%
+        );
+    }
+
+    .hero-cutout {
+      z-index: 3;
+    }
+
+    .hero-bottom-v2 {
+      z-index: 14;
+      border-top: 0 !important;
+    }
+
+    .hero-bottom-v2 .scroll-hint {
+      position: relative;
+      z-index: 15;
+      color: rgba(255,255,255,.96);
+      text-shadow: 0 1px 9px rgba(0,0,0,.26);
+    }
+
+    @media (max-width: 1180px) and (min-width: 901px) {
+      .hero-next-transition {
+        height: 12.6vh;
+        min-height: 90px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-next-transition {
+        right: -30vw;
+        width: 87vw;
+        height: 11.8vh;
+        min-height: 84px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero-next-transition {
+        height: 10.8vh;
+        min-height: 76px;
+      }
+    }
+
+
   </style>
 
 </head>
