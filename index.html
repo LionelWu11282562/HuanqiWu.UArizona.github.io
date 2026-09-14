@@ -5191,28 +5191,301 @@
       grid-row: 2;
     }
 
-    /* ThermalVia: paired source images above a wide dataset / field output */
+    /* ThermalVia: one overview figure + two supporting evidence figures.
+       All three source graphics are text-dense 4:3 plates, so they are
+       never cropped. The overview gets the dominant canvas; the two
+       supporting figures stay visible and can be opened full-screen. */
+
+    .project-slide[data-slide="5"] .project-layout.project-gallery-layout {
+      grid-template-columns:
+        minmax(0, .58fr)
+        minmax(650px, 1.42fr);
+      gap: 3.25vw;
+    }
+
+    .project-slide[data-slide="5"] .project-gallery-layout .project-title {
+      font-size:
+        clamp(46px, 5.55vw, 90px);
+    }
+
+    .project-slide[data-slide="5"] .project-gallery-layout .project-summary {
+      max-width: 515px;
+      font-size:
+        clamp(13px, 1.02vw, 17px);
+      line-height: 1.5;
+    }
+
+    .project-slide[data-slide="5"] .project-facts {
+      margin-top: 19px;
+    }
+
+    .project-slide[data-slide="5"] .project-fact {
+      min-height: 68px;
+      padding: 11px 10px 10px;
+    }
+
+    .project-slide[data-slide="5"] .project-fact strong {
+      font-size:
+        clamp(17px, 1.38vw, 25px);
+    }
+
+    .project-slide[data-slide="5"] .project-fact span {
+      font-size: 6.8px;
+    }
+
+    .project-slide[data-slide="5"] .project-media-stage {
+      height:
+        clamp(500px, 64vh, 665px);
+    }
+
     .gallery-thermal {
       grid-template-columns:
-        minmax(0, 1.16fr)
-        minmax(0, .84fr);
+        minmax(0, 1.62fr)
+        minmax(260px, .78fr);
       grid-template-rows:
-        .76fr 1.24fr;
+        1fr 1fr;
+      gap: 12px;
     }
 
+    /* 01 / Figure 1 — project overview, primary canvas */
     .gallery-thermal .media-slot:nth-child(1) {
       grid-column: 1;
-      grid-row: 1;
+      grid-row: 1 / 3;
     }
 
+    /* 02 / Figure 3 — multimodal landscape */
     .gallery-thermal .media-slot:nth-child(2) {
       grid-column: 2;
       grid-row: 1;
     }
 
+    /* 03 / Figure 4 — knowledge graph */
     .gallery-thermal .media-slot:nth-child(3) {
-      grid-column: 1 / 3;
+      grid-column: 2;
       grid-row: 2;
+    }
+
+    .gallery-thermal .media-slot {
+      cursor: zoom-in;
+      background: rgba(255,255,255,.985);
+    }
+
+    .gallery-thermal .media-slot img {
+      object-fit: contain;
+      padding: 7px 7px 31px;
+      background: rgba(255,255,255,.99);
+    }
+
+    .gallery-thermal .media-slot:nth-child(1) {
+      box-shadow:
+        0 18px 42px rgba(var(--project-accent-rgb), .085),
+        inset 0 1px 0 rgba(255,255,255,.95);
+    }
+
+    .gallery-thermal .media-slot:nth-child(2) .media-meta span,
+    .gallery-thermal .media-slot:nth-child(3) .media-meta span {
+      max-width: 82%;
+      font-size: 6.4px;
+    }
+
+    .gallery-thermal .media-zoom-hint {
+      position: absolute;
+      z-index: 6;
+      top: 9px;
+      right: 9px;
+
+      padding: 5px 7px;
+
+      border: 1px solid rgba(12,35,75,.12);
+      background: rgba(255,255,255,.88);
+
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      font-size: 6.5px;
+      line-height: 1;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+
+      color: var(--project-muted);
+
+      opacity: 0;
+      transform: translateY(-3px);
+
+      transition:
+        opacity .22s ease,
+        transform .22s ease;
+
+      pointer-events: none;
+    }
+
+    .gallery-thermal .media-slot:hover .media-zoom-hint,
+    .gallery-thermal .media-slot:focus-visible .media-zoom-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-thermal .media-slot:focus-visible {
+      outline: 2px solid rgba(12,35,75,.42);
+      outline-offset: 2px;
+    }
+
+    /* Full-screen reading view for the dense TSV figures */
+    .project-image-lightbox {
+      position: fixed;
+      z-index: 5100;
+      inset: 0;
+
+      display: grid;
+      place-items: center;
+
+      padding: 28px;
+
+      background: rgba(7,13,24,.82);
+      backdrop-filter: blur(14px);
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+
+      transition:
+        opacity .25s ease,
+        visibility .25s ease;
+    }
+
+    .project-image-lightbox.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .project-image-lightbox-card {
+      position: relative;
+
+      width: min(94vw, 1500px);
+      max-height: 92vh;
+
+      padding: 13px 13px 42px;
+
+      border: 1px solid rgba(255,255,255,.20);
+      background: rgba(255,255,255,.985);
+
+      box-shadow: 0 34px 110px rgba(0,0,0,.42);
+
+      transform: scale(.97);
+      transition: transform .28s cubic-bezier(.16,1,.3,1);
+    }
+
+    .project-image-lightbox.open .project-image-lightbox-card {
+      transform: scale(1);
+    }
+
+    .project-image-lightbox-card img {
+      display: block;
+      width: 100%;
+      max-height: calc(92vh - 68px);
+      object-fit: contain;
+    }
+
+    .project-image-lightbox-caption {
+      position: absolute;
+      left: 16px;
+      right: 62px;
+      bottom: 12px;
+
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      font-size: 8px;
+      line-height: 1.4;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+
+      color: #66717a;
+    }
+
+    .project-image-lightbox-close {
+      position: absolute;
+      z-index: 2;
+      top: 10px;
+      right: 10px;
+
+      width: 36px;
+      height: 36px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(12,35,75,.14);
+      border-radius: 50%;
+
+      background: rgba(255,255,255,.94);
+      color: #0c234b;
+
+      font-size: 22px;
+      line-height: 1;
+
+      cursor: pointer;
+
+      box-shadow: 0 8px 24px rgba(0,0,0,.14);
+    }
+
+    @media (max-width: 1180px) and (min-width: 901px) {
+
+      .project-slide[data-slide="5"] .project-layout.project-gallery-layout {
+        grid-template-columns:
+          minmax(0, .66fr)
+          minmax(540px, 1.34fr);
+        gap: 2.8vw;
+      }
+
+      .project-slide[data-slide="5"] .project-media-stage {
+        height:
+          clamp(450px, 60vh, 570px);
+      }
+
+      .gallery-thermal {
+        grid-template-columns:
+          minmax(0, 1.48fr)
+          minmax(225px, .82fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .project-slide[data-slide="5"] .project-layout.project-gallery-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .project-slide[data-slide="5"] .project-media-stage {
+        height:
+          clamp(390px, 49vh, 540px);
+      }
+
+      .gallery-thermal {
+        grid-template-columns:
+          minmax(0, 1.35fr)
+          minmax(0, .85fr);
+        grid-template-rows:
+          1fr 1fr;
+        gap: 8px;
+      }
+
+      .gallery-thermal .media-meta span,
+      .gallery-thermal .media-zoom-hint {
+        display: none;
+      }
+
+      .project-image-lightbox {
+        padding: 12px;
+      }
+
+      .project-image-lightbox-card {
+        width: 96vw;
+        padding: 8px 8px 38px;
+      }
     }
 
     /* ---------- Page 07 copy density ---------- */
@@ -6959,7 +7232,6 @@
       data-slide="5"
     >
 
-      
       <div class="project-watermark" aria-hidden="true">
         <img
           src="assets/images/huanqiwu.png"
@@ -6967,7 +7239,7 @@
         >
       </div>
 
-<div class="slide-inner">
+      <div class="slide-inner">
 
         <div class="project-layout project-gallery-layout">
 
@@ -7002,11 +7274,14 @@
 
             <p class="project-summary reveal delay-2">
 
-              An open, structured benchmark dataset for
-              through-silicon vias, integrating published and
-              released measurements with simulation-derived
-              multiphysics records for data mining, surrogate
-              modeling and reproducible TSV design research.
+              An early-stage data infrastructure project for
+              through-silicon vias that turns heterogeneous
+              literature, experimental and simulation evidence
+              into standardized, provenance-aware multimodal
+              records. Geometry, materials, process and operating
+              conditions are linked to imaging, electrical, thermal,
+              mechanical and reliability observations for benchmarking,
+              surrogate modeling and simulation validation.
 
             </p>
 
@@ -7014,18 +7289,18 @@
             <div class="project-facts reveal delay-2">
 
               <div class="project-fact">
-                <strong>Open + FEM</strong>
-                <span>Evidence sources</span>
+                <strong>5 sources</strong>
+                <span>Papers · supplements · repositories · simulation · experiments</span>
               </div>
 
               <div class="project-fact">
-                <strong>4 domains</strong>
-                <span>Electrical · thermal · mechanical · geometry</span>
+                <strong>6 modalities</strong>
+                <span>SEM · EBSD · CT · thermal · stress · S-parameters</span>
               </div>
 
               <div class="project-fact">
-                <strong>JSON / CSV</strong>
-                <span>Reusable dataset layer</span>
+                <strong>Evidence-linked</strong>
+                <span>Ontology · provenance · standardized records</span>
               </div>
 
             </div>
@@ -7038,15 +7313,15 @@
               </span>
 
               <span class="tag">
-                Multiphysics Dataset
+                Multimodal Data
               </span>
 
               <span class="tag">
-                LHS / Sobol
+                Knowledge Graph
               </span>
 
               <span class="tag">
-                FAIR Data
+                FAIR / AI-Ready
               </span>
 
             </div>
@@ -7076,70 +7351,91 @@
           <div class="project-media-stage reveal delay-2">
 
             <div class="project-media-header">
-              <span>TSV dataset / multiphysics evidence</span>
+              <span>Literature-derived multimodal TSV database</span>
               <span>SEMICONDUCTOR / 04</span>
             </div>
 
 
             <div class="project-media-grid gallery-thermal">
 
-              <figure class="media-slot">
+              <figure
+                class="media-slot contain"
+                data-project-image-zoom
+                tabindex="0"
+                aria-label="Open TSV database overview figure"
+              >
 
                 <div class="media-placeholder">
                   <strong>01</strong>
-                  <span>Place TSV structure / geometry illustration here</span>
+                  <span>Overview of the literature-derived TSV multiphysics database</span>
                 </div>
 
                 <img
-                  src="assets/images/thermalvia_structure.png"
-                  alt="Through-silicon via structure and geometry"
+                  src="assets/images/thermalvia_overview.png"
+                  alt="Overview of the literature-derived TSV multiphysics database, from source evidence to standardized data and applications"
                   onerror="this.style.display='none'"
                 >
 
+                <span class="media-zoom-hint">Click to enlarge</span>
+
                 <figcaption class="media-meta">
-                  <span>Diameter · height · liner · pitch · KOZ</span>
+                  <span>Literature → standardized multimodal records → ML / validation</span>
                   <b>01</b>
                 </figcaption>
 
               </figure>
 
 
-              <figure class="media-slot">
+              <figure
+                class="media-slot contain"
+                data-project-image-zoom
+                tabindex="0"
+                aria-label="Open TSV multimodal landscape figure"
+              >
 
                 <div class="media-placeholder">
                   <strong>02</strong>
-                  <span>Place standardized dataset schema figure here</span>
+                  <span>Multimodal landscape of TSV data</span>
                 </div>
 
                 <img
-                  src="assets/images/thermalvia_schema.png"
-                  alt="TSV dataset JSON and CSV schema"
+                  src="assets/images/thermalvia_multimodal.png"
+                  alt="Multimodal TSV data including SEM morphology, EBSD, X-ray CT, thermal fields, mechanical stress and S-parameters"
                   onerror="this.style.display='none'"
                 >
 
+                <span class="media-zoom-hint">Click to enlarge</span>
+
                 <figcaption class="media-meta">
-                  <span>Provenance · units · simulation metadata · targets</span>
+                  <span>SEM · EBSD · CT · thermal · stress · S-parameter</span>
                   <b>02</b>
                 </figcaption>
 
               </figure>
 
 
-              <figure class="media-slot">
+              <figure
+                class="media-slot contain"
+                data-project-image-zoom
+                tabindex="0"
+                aria-label="Open TSV knowledge graph figure"
+              >
 
                 <div class="media-placeholder">
                   <strong>03</strong>
-                  <span>Place multiphysics field / surrogate-model output here</span>
+                  <span>Knowledge graph for standardized TSV observations</span>
                 </div>
 
                 <img
-                  src="assets/images/thermalvia_multiphysics.png"
-                  alt="TSV electrical thermal mechanical multiphysics output"
+                  src="assets/images/thermalvia_knowledge_graph.png"
+                  alt="Knowledge graph linking TSV geometry, materials, process and operating conditions to multimodal observations and literature evidence"
                   onerror="this.style.display='none'"
                 >
 
+                <span class="media-zoom-hint">Click to enlarge</span>
+
                 <figcaption class="media-meta">
-                  <span>Electrical / SI · thermal · stress · reliability</span>
+                  <span>Geometry · material · process · conditions ↔ evidence</span>
                   <b>03</b>
                 </figcaption>
 
@@ -7964,6 +8260,48 @@
 
 
   <!-- =======================================================
+       TSV FIGURE LIGHTBOX
+       ======================================================= -->
+
+  <div
+    class="project-image-lightbox"
+    id="projectImageLightbox"
+    aria-hidden="true"
+  >
+
+    <div
+      class="project-image-lightbox-card"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Enlarged ThermalVia research figure"
+    >
+
+      <img
+        id="projectImageLightboxImage"
+        src=""
+        alt=""
+      >
+
+      <div
+        class="project-image-lightbox-caption"
+        id="projectImageLightboxCaption"
+      ></div>
+
+      <button
+        class="project-image-lightbox-close"
+        id="projectImageLightboxClose"
+        type="button"
+        aria-label="Close enlarged figure"
+      >
+        ×
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
        JAVASCRIPT
        ======================================================= -->
 
@@ -8390,6 +8728,148 @@
 
           closeBrandmarkLightbox();
 
+        }
+
+      }
+
+    );
+
+
+
+    /* -------------------------------------------------------
+       THERMALVIA FIGURE ZOOM / LIGHTBOX
+       ------------------------------------------------------- */
+
+    const projectImageLightbox =
+      document.getElementById("projectImageLightbox");
+
+    const projectImageLightboxImage =
+      document.getElementById("projectImageLightboxImage");
+
+    const projectImageLightboxCaption =
+      document.getElementById("projectImageLightboxCaption");
+
+    const projectImageLightboxClose =
+      document.getElementById("projectImageLightboxClose");
+
+    const projectImageZoomTriggers =
+      document.querySelectorAll("[data-project-image-zoom]");
+
+
+    function openProjectImageLightbox(trigger) {
+
+      const image =
+        trigger.querySelector("img");
+
+      const caption =
+        trigger.querySelector(".media-meta span");
+
+      if (
+        !image
+        || image.style.display === "none"
+      ) {
+        return;
+      }
+
+      projectImageLightboxImage.src =
+        image.getAttribute("src");
+
+      projectImageLightboxImage.alt =
+        image.getAttribute("alt") || "ThermalVia research figure";
+
+      projectImageLightboxCaption.textContent =
+        caption ? caption.textContent : projectImageLightboxImage.alt;
+
+      projectImageLightbox.classList.add("open");
+
+      projectImageLightbox.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+    }
+
+
+    function closeProjectImageLightbox() {
+
+      projectImageLightbox.classList.remove("open");
+
+      projectImageLightbox.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+    }
+
+
+    projectImageZoomTriggers.forEach(
+
+      (trigger) => {
+
+        trigger.addEventListener(
+          "click",
+          () => openProjectImageLightbox(trigger)
+        );
+
+        trigger.addEventListener(
+
+          "keydown",
+
+          (event) => {
+
+            if (
+              event.key === "Enter"
+              || event.key === " "
+            ) {
+
+              event.preventDefault();
+              openProjectImageLightbox(trigger);
+
+            }
+
+          }
+
+        );
+
+      }
+
+    );
+
+
+    projectImageLightboxClose.addEventListener(
+      "click",
+      closeProjectImageLightbox
+    );
+
+
+    projectImageLightbox.addEventListener(
+
+      "click",
+
+      (event) => {
+
+        if (
+          event.target === projectImageLightbox
+        ) {
+          closeProjectImageLightbox();
+        }
+
+      }
+
+    );
+
+
+    window.addEventListener(
+
+      "keydown",
+
+      (event) => {
+
+        if (
+          event.key === "Escape"
+          && projectImageLightbox.classList.contains("open")
+        ) {
+          closeProjectImageLightbox();
         }
 
       }
