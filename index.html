@@ -6498,6 +6498,330 @@
       transform: translateY(0);
     }
 
+
+    /* ---------- Cohort figure + data rail ---------- */
+
+    .pu-cohort-module {
+      min-width: 0;
+      min-height: 0;
+
+      display: grid;
+      grid-template-columns:
+        minmax(0, 1.72fr)
+        minmax(138px, .68fr);
+
+      border:
+        1px solid rgba(71,54,61,.13);
+
+      background:
+        rgba(255,255,255,.99);
+
+      box-shadow:
+        0 9px 23px rgba(64,44,51,.055),
+        inset 0 1px 0 rgba(255,255,255,.96);
+
+      overflow: hidden;
+    }
+
+    .pu-cohort-module .pu-figure-cohort {
+      min-width: 0;
+      min-height: 0;
+
+      border: 0;
+      box-shadow: none;
+
+      background: #ffffff;
+    }
+
+    .gallery-pu-v4 .pu-cohort-module .pu-figure-cohort:hover,
+    .gallery-pu-v4 .pu-cohort-module .pu-figure-cohort:focus-visible {
+      transform: none;
+      border-color: transparent;
+      box-shadow: none;
+    }
+
+    .gallery-pu-v4 .pu-cohort-module .pu-figure-cohort img {
+      padding:
+        5px 7px 27px;
+
+      object-fit: contain;
+    }
+
+    .pu-cohort-rail {
+      position: relative;
+      min-width: 0;
+
+      padding:
+        12px 12px 10px;
+
+      display: flex;
+      flex-direction: column;
+
+      border-left:
+        1px solid rgba(255,255,255,.14);
+
+      background:
+        linear-gradient(
+          154deg,
+          #0a1f43 0%,
+          #0c234b 56%,
+          #13315c 100%
+        );
+
+      color: #ffffff;
+
+      overflow: hidden;
+    }
+
+    .pu-cohort-rail::before {
+      content: "";
+
+      position: absolute;
+      right: -24px;
+      top: -34px;
+
+      width: 92px;
+      height: 92px;
+
+      border:
+        18px solid rgba(255,255,255,.035);
+
+      border-radius: 50%;
+
+      pointer-events: none;
+    }
+
+    .pu-cohort-rail::after {
+      content: "";
+
+      position: absolute;
+      left: 12px;
+      top: 0;
+
+      width: 35px;
+      height: 3px;
+
+      background:
+        var(--pu-red);
+
+      pointer-events: none;
+    }
+
+    .pu-cohort-rail-kicker {
+      position: relative;
+      z-index: 1;
+
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      font-size: 6.2px;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: .095em;
+      text-transform: uppercase;
+
+      color:
+        rgba(255,255,255,.58);
+    }
+
+    .pu-cohort-rail-primary {
+      position: relative;
+      z-index: 1;
+
+      margin-top: 9px;
+      padding-bottom: 8px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.16);
+    }
+
+    .pu-cohort-rail-primary strong {
+      display: block;
+
+      font-size:
+        clamp(18px, 1.55vw, 27px);
+
+      font-weight: 650;
+      line-height: .92;
+      letter-spacing: -.055em;
+
+      color: #ffffff;
+    }
+
+    .pu-cohort-rail-primary span {
+      display: block;
+
+      margin-top: 5px;
+
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      font-size: 6.2px;
+      line-height: 1.3;
+      letter-spacing: .075em;
+      text-transform: uppercase;
+
+      color:
+        rgba(255,255,255,.66);
+    }
+
+    .pu-cohort-rail-split {
+      position: relative;
+      z-index: 1;
+
+      flex: 1;
+
+      min-height: 0;
+
+      margin-top: 8px;
+
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 5px;
+      align-items: end;
+    }
+
+    .pu-cohort-rail-split > div {
+      min-width: 0;
+
+      padding-top: 6px;
+
+      border-top:
+        1px solid rgba(255,255,255,.13);
+    }
+
+    .pu-cohort-rail-split strong {
+      display: block;
+
+      font-size:
+        clamp(9px, .72vw, 13px);
+
+      font-weight: 650;
+      line-height: 1;
+      letter-spacing: -.035em;
+
+      color: #ffffff;
+    }
+
+    .pu-cohort-rail-split span {
+      display: block;
+
+      margin-top: 4px;
+
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      font-size: 4.9px;
+      line-height: 1.25;
+      letter-spacing: .045em;
+      text-transform: uppercase;
+
+      color:
+        rgba(255,255,255,.52);
+    }
+
+    .pu-cohort-rail-note {
+      position: relative;
+      z-index: 1;
+
+      margin-top: 8px;
+      padding-top: 7px;
+
+      border-top:
+        1px solid rgba(255,255,255,.16);
+    }
+
+    .pu-cohort-rail-note strong {
+      display: block;
+
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      font-size: 7.2px;
+      line-height: 1;
+      letter-spacing: .10em;
+
+      color: #ef4056;
+    }
+
+    .pu-cohort-rail-note span {
+      display: block;
+
+      margin-top: 5px;
+
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      font-size: 4.8px;
+      line-height: 1.32;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+
+      color:
+        rgba(255,255,255,.56);
+    }
+
+    @media (max-width: 1320px) and (min-width: 901px) {
+
+      .pu-cohort-module {
+        grid-template-columns:
+          minmax(0, 1.66fr)
+          minmax(128px, .64fr);
+      }
+
+      .pu-cohort-rail {
+        padding:
+          10px 10px 8px;
+      }
+
+      .pu-cohort-rail-primary {
+        margin-top: 7px;
+      }
+
+      .pu-cohort-rail-split {
+        gap: 4px;
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .pu-cohort-module {
+        grid-template-columns:
+          minmax(0, 1.58fr)
+          minmax(118px, .62fr);
+      }
+
+      .pu-cohort-rail-primary strong {
+        font-size: 19px;
+      }
+    }
+
+    @media (max-width: 560px) {
+
+      .pu-cohort-module {
+        grid-template-columns: 1fr;
+      }
+
+      .pu-cohort-rail {
+        min-height: 118px;
+
+        border-left: 0;
+        border-top:
+          1px solid rgba(255,255,255,.14);
+      }
+
+      .pu-cohort-rail-split {
+        align-items: start;
+      }
+    }
+
     /* Medium desktop screens: keep the left/right hierarchy but tighten it. */
     @media (max-width: 1320px) and (min-width: 901px) {
 
@@ -9963,35 +10287,77 @@
                 </figure>
 
 
-                <figure
-                  class="media-slot pu-figure-cohort"
-                  data-project-image-zoom
-                  role="button"
-                  tabindex="0"
-                  aria-label="Enlarge PU-Boost cohort and data split figure"
-                >
+                <div class="pu-cohort-module">
 
-                  <div class="media-placeholder">
-                    <strong>02</strong>
-                    <span>Study population and train / validation / test partition</span>
-                  </div>
-
-                  <img
-                    src="assets/images/pu_cohort_split.png"
-                    alt="PU-Boost cohort figure showing 47,841 recruited adults, analytic cohort, and split into training, validation, and test sets"
-                    onerror="this.style.display='none'"
+                  <figure
+                    class="media-slot pu-figure-cohort"
+                    data-project-image-zoom
+                    role="button"
+                    tabindex="0"
+                    aria-label="Enlarge PU-Boost cohort and data split figure"
                   >
 
-                  <span class="media-zoom-hint">
-                    Open figure
-                  </span>
+                    <div class="media-placeholder">
+                      <strong>02</strong>
+                      <span>Study population and train / validation / test partition</span>
+                    </div>
 
-                  <figcaption class="media-meta">
-                    <span>47,841 recruited · 43,105 analytic cohort · 25,883 training · 8,611 validation · 8,611 test</span>
-                    <b>02</b>
-                  </figcaption>
+                    <img
+                      src="assets/images/pu_cohort_split.png"
+                      alt="PU-Boost cohort figure showing 47,841 recruited adults, analytic cohort, and split into training, validation, and test sets"
+                      onerror="this.style.display='none'"
+                    >
 
-                </figure>
+                    <span class="media-zoom-hint">
+                      Open figure
+                    </span>
+
+                    <figcaption class="media-meta">
+                      <span>47,841 recruited · cohort architecture</span>
+                      <b>02</b>
+                    </figcaption>
+
+                  </figure>
+
+
+                  <aside class="pu-cohort-rail" aria-label="PU-Boost cohort summary">
+
+                    <div class="pu-cohort-rail-kicker">
+                      Cohort / 02
+                    </div>
+
+                    <div class="pu-cohort-rail-primary">
+                      <strong>43,105</strong>
+                      <span>Analytic cohort</span>
+                    </div>
+
+                    <div class="pu-cohort-rail-split">
+
+                      <div>
+                        <strong>25,883</strong>
+                        <span>Training</span>
+                      </div>
+
+                      <div>
+                        <strong>8,611</strong>
+                        <span>Validation</span>
+                      </div>
+
+                      <div>
+                        <strong>8,611</strong>
+                        <span>Test</span>
+                      </div>
+
+                    </div>
+
+                    <div class="pu-cohort-rail-note">
+                      <strong>6 : 2 : 2</strong>
+                      <span>P/U training → reference-label evaluation</span>
+                    </div>
+
+                  </aside>
+
+                </div>
 
               </div>
 
