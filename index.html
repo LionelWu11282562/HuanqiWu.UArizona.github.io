@@ -6045,11 +6045,13 @@
 
 
 
+    
     /* =========================================================
-       PU-BOOST / IMAGE-PROPORTION REDESIGN
-       Tailored to the four supplied figures:
-       SHAP (wide), model table (ultra-wide), method summary
-       (landscape) and confusion matrix (near-square).
+       PU-BOOST / LEFT-RIGHT SCIENTIFIC GALLERY
+       Two primary figures occupy the left evidence column.
+       Four near-square supporting figures occupy two paired
+       rows on the right. Every scientific figure remains
+       proportional and independently zoomable.
        ========================================================= */
 
     .project-slide[data-slide="2"] {
@@ -6070,9 +6072,6 @@
       --project-shadow: rgba(86,45,58,.095);
     }
 
-    /* Keep the warm red identity, but neutralize the canvas enough
-       that the purple/orange SHAP palette and blue confusion matrix
-       remain visually natural rather than competing with the page. */
     .project-slide[data-slide="2"]::before {
       background:
         radial-gradient(
@@ -6101,23 +6100,22 @@
         66px 66px;
     }
 
-    /* Slightly more room for the evidence wall than on the other
-       project pages; the left narrative remains readable but compact. */
+    /* Give the evidence wall more horizontal room on this page only. */
     .project-slide[data-slide="2"] .project-layout.project-gallery-layout {
       grid-template-columns:
-        minmax(0, .58fr)
-        minmax(650px, 1.42fr);
-      gap: 3.15vw;
+        minmax(0, .57fr)
+        minmax(690px, 1.43fr);
+      gap: 3vw;
       align-items: center;
     }
 
     .project-slide[data-slide="2"] .project-copy-block {
-      max-width: 570px;
+      max-width: 565px;
     }
 
     .project-slide[data-slide="2"] .project-gallery-layout .project-title {
       font-size:
-        clamp(54px, 6.15vw, 100px);
+        clamp(54px, 6vw, 98px);
       line-height: .83;
     }
 
@@ -6125,12 +6123,11 @@
       max-width: 535px;
       margin-top: 18px;
       font-size:
-        clamp(13.5px, 1.04vw, 16.5px);
+        clamp(13.5px, 1.02vw, 16.5px);
       line-height: 1.53;
       color: var(--pu-copy);
     }
 
-    /* Performance strip: hierarchy first, numbers second. */
     .project-slide[data-slide="2"] .project-facts {
       margin-top: 19px;
       background: rgba(255,255,255,.38);
@@ -6195,12 +6192,14 @@
     }
 
     /* ---------------------------------------------------------
-       PU EVIDENCE STAGE
+       EVIDENCE STAGE
+       Left  = two primary figures.
+       Right = four supporting figures in two paired rows.
        --------------------------------------------------------- */
 
     .project-slide[data-slide="2"] .project-media-stage {
       height:
-        clamp(535px, 65vh, 690px);
+        clamp(555px, 67vh, 735px);
       padding: 18px;
 
       border-color: var(--pu-line);
@@ -6247,45 +6246,110 @@
       border-bottom-color: var(--pu-line);
     }
 
-    /* Proportion-aware grid:
-       row 1 = wide SHAP,
-       row 2 = ultra-wide model table,
-       row 3 = method diagram + near-square confusion matrix. */
-    .gallery-pu-v2 {
+    /* The complete evidence wall is now a true left/right composition. */
+    .gallery-pu-v4 {
       grid-template-columns:
-        minmax(0, 1.58fr)
-        minmax(220px, .82fr);
+        minmax(0, 1.36fr)
+        minmax(360px, .94fr);
+      grid-template-rows: 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .pu-primary-column,
+    .pu-support-column {
+      min-width: 0;
+      min-height: 0;
+    }
+
+    .pu-primary-column {
+      display: grid;
       grid-template-rows:
-        minmax(0, 1.04fr)
-        84px
-        minmax(0, .98fr);
+        minmax(0, 1.48fr)
+        minmax(0, .72fr);
       gap: 10px;
     }
 
-    .gallery-pu-v2 .pu-figure-shap {
-      grid-column: 1 / 3;
-      grid-row: 1;
+    .pu-support-column {
+      display: grid;
+      grid-template-rows:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+      gap: 10px;
     }
 
-    .gallery-pu-v2 .pu-figure-table {
-      grid-column: 1 / 3;
-      grid-row: 2;
+    .pu-support-group {
+      min-width: 0;
+      min-height: 0;
+
+      padding: 9px;
+
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 8px;
+
+      border: 1px solid rgba(71,54,61,.13);
+      background: rgba(255,255,255,.72);
+
+      box-shadow:
+        0 9px 23px rgba(64,44,51,.045),
+        inset 0 1px 0 rgba(255,255,255,.95);
+
+      overflow: hidden;
     }
 
-    .gallery-pu-v2 .pu-figure-method {
-      grid-column: 1;
-      grid-row: 3;
+    .pu-support-group-head {
+      position: relative;
+      padding-left: 14px;
+
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      font-size: 7px;
+      line-height: 1.35;
+      letter-spacing: .085em;
+      text-transform: uppercase;
+
+      color: var(--pu-muted);
     }
 
-    .gallery-pu-v2 .pu-figure-confusion {
-      grid-column: 2;
-      grid-row: 3;
+    .pu-support-group-head::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 8px;
+      height: 2px;
+      transform: translateY(-50%);
     }
 
-    .gallery-pu-v2 .media-slot {
+    .pu-method-group .pu-support-group-head::before {
+      background: var(--pu-red);
+    }
+
+    .pu-shap-group .pu-support-group-head::before {
+      background: var(--pu-blue);
+    }
+
+    .pu-support-grid {
+      min-width: 0;
+      min-height: 0;
+
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 8px;
+
+      align-items: center;
+    }
+
+    /* Every scientific plate is shown in full. */
+    .gallery-pu-v4 .media-slot {
       cursor: zoom-in;
-      background: rgba(255,255,255,.985);
+      background: rgba(255,255,255,.99);
       border-color: rgba(71,54,61,.13);
+
       box-shadow:
         0 9px 23px rgba(64,44,51,.055),
         inset 0 1px 0 rgba(255,255,255,.96);
@@ -6296,106 +6360,122 @@
         box-shadow .24s ease;
     }
 
-    .gallery-pu-v2 .media-slot:hover,
-    .gallery-pu-v2 .media-slot:focus-visible {
+    .gallery-pu-v4 .media-slot:hover,
+    .gallery-pu-v4 .media-slot:focus-visible {
       transform: translateY(-2px);
       border-color: rgba(171,5,32,.25);
+
       box-shadow:
         0 15px 30px rgba(64,44,51,.085),
         inset 0 1px 0 rgba(255,255,255,.98);
     }
 
-    .gallery-pu-v2 .media-slot:focus-visible {
+    .gallery-pu-v4 .media-slot:focus-visible {
       outline: 2px solid rgba(171,5,32,.30);
       outline-offset: 2px;
     }
 
-    /* Use contain for all scientific figures—no labels, axes or legends
-       are sacrificed for aesthetics. White framing absorbs the inevitable
-       difference in aspect ratios. */
-    .gallery-pu-v2 .media-slot img {
+    .gallery-pu-v4 .media-slot img {
+      width: 100%;
+      height: 100%;
+      display: block;
+
       object-fit: contain;
       background: #ffffff;
     }
 
-    .gallery-pu-v2 .pu-figure-shap img {
-      padding: 5px 7px 27px;
+    /* Primary figure 01: Fig. 7 receives the largest canvas. */
+    .gallery-pu-v4 .pu-figure-performance img {
+      padding: 7px 8px 30px;
     }
 
-    .gallery-pu-v2 .pu-figure-table img {
-      padding: 3px 5px 22px;
+    /* Primary figure 02: cohort/data split. */
+    .gallery-pu-v4 .pu-figure-cohort img {
+      padding: 6px 8px 28px;
     }
 
-    .gallery-pu-v2 .pu-figure-method img {
-      padding: 5px 6px 27px;
-    }
-
-    .gallery-pu-v2 .pu-figure-confusion img {
-      padding: 5px 6px 27px;
-    }
-
-    /* Alternating UA micro-accent, not a recoloring of the figures. */
-    .gallery-pu-v2 .pu-figure-shap::after,
-    .gallery-pu-v2 .pu-figure-method::after {
+    .gallery-pu-v4 .pu-figure-performance::after {
       background: var(--pu-red);
     }
 
-    .gallery-pu-v2 .pu-figure-table::after,
-    .gallery-pu-v2 .pu-figure-confusion::after {
+    .gallery-pu-v4 .pu-figure-cohort::after {
       background: var(--pu-blue);
     }
 
-    .gallery-pu-v2 .media-meta {
-      left: 9px;
-      right: 9px;
-      bottom: 7px;
+    /* Supporting figures stay close to their native square-ish proportions. */
+    .pu-support-grid .media-slot {
+      width: 100%;
+      aspect-ratio: 1.12 / 1;
+      min-height: 0;
+      align-self: center;
     }
 
-    .gallery-pu-v2 .media-meta span {
-      max-width: 86%;
+    .pu-support-grid .media-slot img {
+      padding: 5px 5px 24px;
+    }
+
+    .pu-method-group .media-slot::after,
+    .pu-method-group .media-meta b {
+      background: var(--pu-red);
+    }
+
+    .pu-shap-group .media-slot::after,
+    .pu-shap-group .media-meta b {
+      background: var(--pu-blue);
+    }
+
+    .gallery-pu-v4 .media-meta {
+      left: 8px;
+      right: 8px;
+      bottom: 6px;
+    }
+
+    .gallery-pu-v4 .media-meta span {
+      max-width: 87%;
       padding: 4px 6px;
-      font-size: 6.1px;
-      line-height: 1.3;
-      letter-spacing: .05em;
+
+      font-size: 5.9px;
+      line-height: 1.28;
+      letter-spacing: .048em;
+
       background: rgba(40,28,33,.76);
     }
 
-    .gallery-pu-v2 .pu-figure-table .media-meta span {
-      max-width: 92%;
-      background: rgba(12,35,75,.78);
+    .gallery-pu-v4 .pu-figure-performance .media-meta span {
+      font-size: 6.3px;
     }
 
-    .gallery-pu-v2 .pu-figure-confusion .media-meta span {
+    .gallery-pu-v4 .pu-figure-cohort .media-meta span,
+    .pu-shap-group .media-meta span {
       background: rgba(12,35,75,.80);
     }
 
-    .gallery-pu-v2 .media-meta b {
-      width: 22px;
-      height: 22px;
-      font-size: 6.5px;
+    .gallery-pu-v4 .media-meta b {
+      width: 21px;
+      height: 21px;
+      font-size: 6.3px;
     }
 
-    .gallery-pu-v2 .pu-figure-table .media-meta b,
-    .gallery-pu-v2 .pu-figure-confusion .media-meta b {
+    .gallery-pu-v4 .pu-figure-cohort .media-meta b {
       background: var(--pu-blue);
     }
 
-    .gallery-pu-v2 .media-zoom-hint {
+    .gallery-pu-v4 .media-zoom-hint {
       position: absolute;
       z-index: 6;
-      top: 8px;
-      right: 8px;
+      top: 7px;
+      right: 7px;
 
       padding: 5px 7px;
 
       border: 1px solid rgba(71,54,61,.12);
-      background: rgba(255,255,255,.90);
+      background: rgba(255,255,255,.91);
 
       font-family:
         "IBM Plex Mono",
         monospace;
 
-      font-size: 6px;
+      font-size: 5.8px;
       line-height: 1;
       letter-spacing: .065em;
       text-transform: uppercase;
@@ -6412,25 +6492,25 @@
       pointer-events: none;
     }
 
-    .gallery-pu-v2 .media-slot:hover .media-zoom-hint,
-    .gallery-pu-v2 .media-slot:focus-visible .media-zoom-hint {
+    .gallery-pu-v4 .media-slot:hover .media-zoom-hint,
+    .gallery-pu-v4 .media-slot:focus-visible .media-zoom-hint {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* Desktop compression without changing the hierarchy. */
-    @media (max-width: 1260px) and (min-width: 901px) {
+    /* Medium desktop screens: keep the left/right hierarchy but tighten it. */
+    @media (max-width: 1320px) and (min-width: 901px) {
 
       .project-slide[data-slide="2"] .project-layout.project-gallery-layout {
         grid-template-columns:
-          minmax(0, .64fr)
-          minmax(580px, 1.36fr);
+          minmax(0, .63fr)
+          minmax(600px, 1.37fr);
         gap: 2.6vw;
       }
 
       .project-slide[data-slide="2"] .project-media-stage {
         height:
-          clamp(500px, 62vh, 620px);
+          clamp(515px, 64vh, 650px);
         padding: 15px;
       }
 
@@ -6439,20 +6519,30 @@
         right: 15px;
       }
 
-      .gallery-pu-v2 {
+      .gallery-pu-v4 {
         grid-template-columns:
-          minmax(0, 1.50fr)
-          minmax(200px, .80fr);
-        grid-template-rows:
-          minmax(0, 1fr)
-          74px
-          minmax(0, .95fr);
+          minmax(0, 1.28fr)
+          minmax(320px, .92fr);
+        gap: 9px;
+      }
+
+      .pu-primary-column,
+      .pu-support-column {
         gap: 8px;
+      }
+
+      .pu-support-group {
+        padding: 7px;
+        gap: 6px;
+      }
+
+      .pu-support-grid {
+        gap: 6px;
       }
 
       .project-slide[data-slide="2"] .project-gallery-layout .project-title {
         font-size:
-          clamp(48px, 5.6vw, 82px);
+          clamp(48px, 5.55vw, 82px);
       }
 
       .project-slide[data-slide="2"] .project-gallery-layout .project-summary {
@@ -6460,7 +6550,7 @@
       }
     }
 
-    /* Mobile keeps the scientific hierarchy but avoids microscopic cards. */
+    /* Mobile/tablet: stack the columns, but keep the supporting images paired. */
     @media (max-width: 900px) {
 
       .project-slide[data-slide="2"] .project-layout.project-gallery-layout {
@@ -6473,8 +6563,8 @@
       }
 
       .project-slide[data-slide="2"] .project-media-stage {
-        height:
-          clamp(430px, 52vh, 570px);
+        height: auto;
+        min-height: 720px;
         padding: 12px;
       }
 
@@ -6483,23 +6573,32 @@
         right: 12px;
       }
 
-      .gallery-pu-v2 {
-        grid-template-columns:
-          minmax(0, 1.42fr)
-          minmax(0, .78fr);
-        grid-template-rows:
-          minmax(0, 1fr)
-          62px
-          minmax(0, .95fr);
-        gap: 7px;
+      .gallery-pu-v4 {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        gap: 9px;
       }
 
-      .gallery-pu-v2 .media-meta span,
-      .gallery-pu-v2 .media-zoom-hint {
+      .pu-primary-column {
+        grid-template-rows:
+          minmax(220px, auto)
+          minmax(150px, auto);
+      }
+
+      .pu-support-column {
+        grid-template-rows: auto auto;
+      }
+
+      .pu-support-group {
+        min-height: 230px;
+      }
+
+      .gallery-pu-v4 .media-meta span,
+      .gallery-pu-v4 .media-zoom-hint {
         display: none;
       }
 
-      .gallery-pu-v2 .media-meta b {
+      .gallery-pu-v4 .media-meta b {
         width: 18px;
         height: 18px;
       }
@@ -6509,18 +6608,26 @@
       }
     }
 
+    @media (max-width: 560px) {
+
+      .pu-support-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pu-support-grid .media-slot {
+        aspect-ratio: 1.25 / 1;
+      }
+
+      .pu-support-group {
+        min-height: auto;
+      }
+    }
+
     @media (max-height: 760px) and (min-width: 901px) {
 
       .project-slide[data-slide="2"] .project-media-stage {
         height:
-          clamp(455px, 61vh, 530px);
-      }
-
-      .gallery-pu-v2 {
-        grid-template-rows:
-          minmax(0, 1fr)
-          67px
-          minmax(0, .90fr);
+          clamp(475px, 61vh, 575px);
       }
 
       .project-slide[data-slide="2"] .project-gallery-layout .project-summary {
@@ -6547,6 +6654,15 @@
 
       .project-slide[data-slide="2"] .project-gallery-layout .project-links {
         margin-top: 12px;
+      }
+
+      .pu-support-group {
+        padding: 6px;
+        gap: 5px;
+      }
+
+      .pu-support-grid {
+        gap: 5px;
       }
     }
 
@@ -9667,8 +9783,6 @@
 
 </section>
 
-
-
     <!-- =====================================================
          SLIDE 03 — PROJECT 01 / PU-BOOST
          ===================================================== -->
@@ -9716,11 +9830,10 @@
             <p class="project-summary reveal delay-2">
 
               PU-Boost treats potentially undiagnosed hypertension as a
-              positive-unlabeled learning problem. A two-stage stratification
-              procedure reconstructs a cleaner, balanced training set from
-              diagnosed cases and heterogeneous unlabeled participants,
-              improving test accuracy while substantially increasing
-              sensitivity to missed positive cases.
+              positive-unlabeled learning problem. Elastic Net first performs
+              global P/U stratification, a Random Forest then refines the
+              uncertain region, and persistently ambiguous samples are rejected
+              before final supervised learning on a reconstructed balanced set.
 
             </p>
 
@@ -9728,13 +9841,13 @@
             <div class="project-facts reveal delay-2">
 
               <div class="project-fact">
-                <strong>67.23%</strong>
-                <span>Test accuracy</span>
+                <strong>81.72%</strong>
+                <span>Sensitivity</span>
               </div>
 
               <div class="project-fact">
-                <strong>81.72%</strong>
-                <span>Sensitivity</span>
+                <strong>68.23%</strong>
+                <span>Balanced accuracy</span>
               </div>
 
               <div class="project-fact">
@@ -9746,10 +9859,8 @@
 
 
             <div class="pu-comparison-note reveal delay-2">
-              vs. logistic regression ·
-              <strong>+1.14 pp accuracy</strong> ·
-              <strong>+13.40 pp sensitivity</strong> ·
-              <strong>534 fewer false negatives</strong>
+              25,883 TRAINING SAMPLES → 16,034 RECONSTRUCTED SAMPLES · 9,849 REJECTED<br>
+              VS. STANDARD XGBOOST · <strong>−508 FALSE NEGATIVES (−41.1%)</strong> · <strong>+12.75 PP SENSITIVITY</strong>
             </div>
 
 
@@ -9778,23 +9889,29 @@
 
               <a
                 class="text-link"
-                href="#"
+                href="assets/papers/PU-Boost.pdf"
+                target="_blank"
+                rel="noopener"
               >
-                Case Study ↗
+                Manuscript ↗
               </a>
 
               <a
                 class="text-link"
-                href="#"
+                href="https://github.com/LionelWu11282562/A-Two-Stage-Probability-Stratified-Method-for-Ambiguous-Dataset-Optimization"
+                target="_blank"
+                rel="noopener"
               >
                 GitHub ↗
               </a>
 
               <a
                 class="text-link"
-                href="#"
+                href="https://github.com/LionelWu11282562/A-Two-Stage-Probability-Stratified-Method-for-Ambiguous-Dataset-Optimization/tree/main/figures"
+                target="_blank"
+                rel="noopener"
               >
-                Research ↗
+                Figures ↗
               </a>
 
             </div>
@@ -9805,139 +9922,231 @@
           <div class="project-media-stage reveal delay-2">
 
             <div class="project-media-header">
-              <span>Method / explainability / held-out performance</span>
+              <span>Performance / cohort design / method / explainability</span>
               <span>PU / 01</span>
             </div>
 
 
-            <div class="project-media-grid gallery-pu-v2">
+            <div class="project-media-grid gallery-pu-v4">
 
-              <!-- 01 / WIDE SHAP FIGURE -->
-              <figure
-                class="media-slot pu-figure-shap"
-                data-project-image-zoom
-                role="button"
-                tabindex="0"
-                aria-label="Enlarge PU-Boost SHAP figure"
-              >
+              <!-- LEFT / TWO PRIMARY FIGURES -->
+              <div class="pu-primary-column">
 
-                <div class="media-placeholder">
-                  <strong>01</strong>
-                  <span>SHAP global importance and dependence structure</span>
-                </div>
-
-                <img
-                  src="assets/images/pu_shape.png"
-                  alt="PU-Boost SHAP summary and dependence plots"
-                  onerror="this.style.display='none'"
+                <figure
+                  class="media-slot pu-figure-performance"
+                  data-project-image-zoom
+                  role="button"
+                  tabindex="0"
+                  aria-label="Enlarge PU-Boost performance figure"
                 >
 
-                <span class="media-zoom-hint">
-                  Open figure
-                </span>
+                  <div class="media-placeholder">
+                    <strong>01</strong>
+                    <span>Figure 7 · held-out performance and sensitivity-specificity tradeoff</span>
+                  </div>
 
-                <figcaption class="media-meta">
-                  <span>SHAP · global importance · dependence structure</span>
-                  <b>01</b>
-                </figcaption>
+                  <img
+                    src="assets/images/pu_fig7_performance.png"
+                    alt="PU-Boost Figure 7 showing false positives and false negatives across models, plus specificity versus sensitivity"
+                    onerror="this.style.display='none'"
+                  >
 
-              </figure>
+                  <span class="media-zoom-hint">
+                    Open figure
+                  </span>
+
+                  <figcaption class="media-meta">
+                    <span>Figure 7 · False negatives and false positives · sensitivity vs. specificity</span>
+                    <b>01</b>
+                  </figcaption>
+
+                </figure>
 
 
-              <!-- 02 / ULTRA-WIDE MODEL TABLE -->
-              <figure
-                class="media-slot pu-figure-table"
-                data-project-image-zoom
-                role="button"
-                tabindex="0"
-                aria-label="Enlarge PU-Boost model comparison table"
-              >
-
-                <div class="media-placeholder">
-                  <strong>02</strong>
-                  <span>Held-out model comparison</span>
-                </div>
-
-                <img
-                  src="assets/images/pu_model_table.png"
-                  alt="PU-Boost model comparison table with screening metrics"
-                  onerror="this.style.display='none'"
+                <figure
+                  class="media-slot pu-figure-cohort"
+                  data-project-image-zoom
+                  role="button"
+                  tabindex="0"
+                  aria-label="Enlarge PU-Boost cohort and data split figure"
                 >
 
-                <span class="media-zoom-hint">
-                  Open table
-                </span>
+                  <div class="media-placeholder">
+                    <strong>02</strong>
+                    <span>Study population and train / validation / test partition</span>
+                  </div>
 
-                <figcaption class="media-meta">
-                  <span>Highest accuracy · sensitivity · NPV · F1 · balanced accuracy among compared models</span>
-                  <b>02</b>
-                </figcaption>
+                  <img
+                    src="assets/images/pu_cohort_split.png"
+                    alt="PU-Boost cohort figure showing 47,841 recruited adults, analytic cohort, and split into training, validation, and test sets"
+                    onerror="this.style.display='none'"
+                  >
 
-              </figure>
+                  <span class="media-zoom-hint">
+                    Open figure
+                  </span>
+
+                  <figcaption class="media-meta">
+                    <span>47,841 recruited · 43,105 analytic cohort · 25,883 training · 8,611 validation · 8,611 test</span>
+                    <b>02</b>
+                  </figcaption>
+
+                </figure>
+
+              </div>
 
 
-              <!-- 03 / METHOD FIGURE -->
-              <figure
-                class="media-slot pu-figure-method"
-                data-project-image-zoom
-                role="button"
-                tabindex="0"
-                aria-label="Enlarge PU-Boost two-stage stratification workflow"
-              >
+              <!-- RIGHT / FOUR SMALLER FIGURES -->
+              <div class="pu-support-column">
 
-                <div class="media-placeholder">
-                  <strong>03</strong>
-                  <span>Two-stage stratification and training-set reconstruction</span>
+                <div class="pu-support-group pu-method-group">
+
+                  <div class="pu-support-group-head">
+                    Two-stage reconstruction
+                  </div>
+
+                  <div class="pu-support-grid">
+
+                    <figure
+                      class="media-slot"
+                      data-project-image-zoom
+                      role="button"
+                      tabindex="0"
+                      aria-label="Enlarge PU-Boost stage 1 figure"
+                    >
+
+                      <div class="media-placeholder">
+                        <strong>03</strong>
+                        <span>Stage 1 · P versus U stratification</span>
+                      </div>
+
+                      <img
+                        src="assets/images/pu_stage1_stratification.png"
+                        alt="PU-Boost stage 1 figure showing P versus U setup and the distribution of stage 1 scores"
+                        onerror="this.style.display='none'"
+                      >
+
+                      <span class="media-zoom-hint">
+                        Open figure
+                      </span>
+
+                      <figcaption class="media-meta">
+                        <span>Stage 1 · N1 2,144 · U1 18,426 · P1 5,313</span>
+                        <b>03</b>
+                      </figcaption>
+
+                    </figure>
+
+
+                    <figure
+                      class="media-slot"
+                      data-project-image-zoom
+                      role="button"
+                      tabindex="0"
+                      aria-label="Enlarge PU-Boost stage 2 figure"
+                    >
+
+                      <div class="media-placeholder">
+                        <strong>04</strong>
+                        <span>Stage 2 · uncertain-region refinement</span>
+                      </div>
+
+                      <img
+                        src="assets/images/pu_stage2_refinement.png"
+                        alt="PU-Boost stage 2 figure showing random forest refinement within the uncertain region and final reconstructed labels"
+                        onerror="this.style.display='none'"
+                      >
+
+                      <span class="media-zoom-hint">
+                        Open figure
+                      </span>
+
+                      <figcaption class="media-meta">
+                        <span>Stage 2 · N2 5,873 · reject 9,849 · P2 2,704</span>
+                        <b>04</b>
+                      </figcaption>
+
+                    </figure>
+
+                  </div>
+
                 </div>
 
-                <img
-                  src="assets/images/pu_summary.png"
-                  alt="PU-Boost two-stage stratification and reconstructed training-set workflow"
-                  onerror="this.style.display='none'"
-                >
 
-                <span class="media-zoom-hint">
-                  Open method
-                </span>
+                <div class="pu-support-group pu-shap-group">
 
-                <figcaption class="media-meta">
-                  <span>Elastic-net stage 1 · random-forest stage 2 · pseudo-label reconstruction</span>
-                  <b>03</b>
-                </figcaption>
+                  <div class="pu-support-group-head">
+                    Explainability
+                  </div>
 
-              </figure>
+                  <div class="pu-support-grid">
+
+                    <figure
+                      class="media-slot"
+                      data-project-image-zoom
+                      role="button"
+                      tabindex="0"
+                      aria-label="Enlarge PU-Boost SHAP summary figure"
+                    >
+
+                      <div class="media-placeholder">
+                        <strong>05</strong>
+                        <span>SHAP summary and global feature importance</span>
+                      </div>
+
+                      <img
+                        src="assets/images/pu_shap_summary.png"
+                        alt="PU-Boost SHAP summary plot showing global feature importance"
+                        onerror="this.style.display='none'"
+                      >
+
+                      <span class="media-zoom-hint">
+                        Open figure
+                      </span>
+
+                      <figcaption class="media-meta">
+                        <span>SHAP summary · global feature importance</span>
+                        <b>05</b>
+                      </figcaption>
+
+                    </figure>
 
 
-              <!-- 04 / CONFUSION MATRIX -->
-              <figure
-                class="media-slot pu-figure-confusion"
-                data-project-image-zoom
-                role="button"
-                tabindex="0"
-                aria-label="Enlarge PU-Boost confusion matrix"
-              >
+                    <figure
+                      class="media-slot"
+                      data-project-image-zoom
+                      role="button"
+                      tabindex="0"
+                      aria-label="Enlarge PU-Boost SHAP dependence plots"
+                    >
 
-                <div class="media-placeholder">
-                  <strong>04</strong>
-                  <span>Held-out confusion matrix</span>
+                      <div class="media-placeholder">
+                        <strong>06</strong>
+                        <span>SHAP dependence plots</span>
+                      </div>
+
+                      <img
+                        src="assets/images/pu_shap_dependence.png"
+                        alt="PU-Boost SHAP dependence plots for age, BMI, waist circumference, and maternal hypertension history"
+                        onerror="this.style.display='none'"
+                      >
+
+                      <span class="media-zoom-hint">
+                        Open figure
+                      </span>
+
+                      <figcaption class="media-meta">
+                        <span>Age · BMI · waist circumference · family history</span>
+                        <b>06</b>
+                      </figcaption>
+
+                    </figure>
+
+                  </div>
+
                 </div>
 
-                <img
-                  src="assets/images/pu_confusematrix.png"
-                  alt="PU-Boost confusion matrix"
-                  onerror="this.style.display='none'"
-                >
-
-                <span class="media-zoom-hint">
-                  Open matrix
-                </span>
-
-                <figcaption class="media-meta">
-                  <span>3,258 TP · 2,531 TN · 2,093 FP · 729 FN</span>
-                  <b>04</b>
-                </figcaption>
-
-              </figure>
+              </div>
 
             </div>
 
